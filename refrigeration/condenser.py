@@ -59,12 +59,28 @@ def generate_condenser_objects(rack_info, operation_type, template):
 
     
 def prepare_and_store_condenser_objects(mt_info, lt_info, selected_template):
+    """
+    Generate and store condenser and curve objects without using global variables.
+
+    Args:
+        mt_info (list): List of MT rack data
+        lt_info (list): List of LT rack data
+        selected_template (str): Template type, 'old', 'new', or 'advanced'
+
+    Returns:
+        dict: A dictionary containing the condenser and curve objects for MT and LT
+    """
+    # Generate condenser and curve objects for MT and LT
     mt_condensers, mt_curves = generate_condenser_objects(mt_info, "MT", selected_template)
     lt_condensers, lt_curves = generate_condenser_objects(lt_info, "LT", selected_template)
 
-    globals()["mt_condensers"] = mt_condensers
-    globals()["lt_condensers"] = lt_condensers
-    globals()["mt_curves"] = mt_curves
-    globals()["lt_curves"] = lt_curves
+    # Return the generated objects as a dictionary
+    result = {
+        "mt_condensers": mt_condensers,
+        "lt_condensers": lt_condensers,
+        "mt_curves": mt_curves,
+        "lt_curves": lt_curves
+    }
 
-    print("✅ Condenser and curve objects generated and stored in globals.")
+    print("✅ Condenser and curve objects generated and stored in the result.")
+    return result

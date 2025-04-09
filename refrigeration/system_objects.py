@@ -7,7 +7,7 @@ def generate_system_and_casewalkin_lists(
     selected_walkin_units,
     mt_racks,
     lt_racks,
-    template,
+    selected_template,
     system_name_prefix="Supermarket Rack",
     compressor_prefix="Compressor_List",
     condenser_prefix="Condenser",
@@ -15,7 +15,7 @@ def generate_system_and_casewalkin_lists(
     end_use_category="Refrigeration"
 ):
     """
-    Generate RefrigerationSystem and CaseAndWalkInList objects from global variables.
+    Generate RefrigerationSystem and CaseAndWalkInList objects.
     Returns a list of JSON objects.
     """
 
@@ -31,8 +31,8 @@ def generate_system_and_casewalkin_lists(
     def create_objects_for_rack(rack, rack_type):
         rack_number = next(rack_id_gen)
         case_and_walkin_names = [name_map.get(item["name"], item["name"]) for item in rack]
-        suction_temp = get_suction_temp(template, rack_type)
-        min_cond_temp = get_min_condensing_temp(template, rack_type)
+        suction_temp = get_suction_temp(selected_template, rack_type)
+        min_cond_temp = get_min_condensing_temp(selected_template, rack_type)
 
         system_name = f"{system_name_prefix} {rack_type} {rack_number}"
         list_name = f"{system_name}_CaseWalkinList"
@@ -76,7 +76,7 @@ def prepare_and_store_system_and_casewalkin_lists(
     template
 ):
     """
-    Wrapper function to generate system + case/walkin list and store to globals.
+    Wrapper function to generate system + case/walkin list and return the result.
     """
     system_objects = generate_system_and_casewalkin_lists(
         selected_case_units,
@@ -85,5 +85,7 @@ def prepare_and_store_system_and_casewalkin_lists(
         lt_racks,
         template
     )
-    globals()["refrigeration_system_objects"] = system_objects
-    print("✅ Refrigeration system objects stored in globals.")
+    
+    # Instead of using globals(), return the generated system objects
+    print("✅ Refrigeration system +  case/walkin list objects generated and ready.")
+    return system_objects

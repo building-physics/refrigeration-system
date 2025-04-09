@@ -14,7 +14,7 @@ def export_full_refrigeration_system_to_json(
     lt_curves,
     case_objects,
     walkin_objects,
-    refrigeration_system_objects,
+    system_and_casewalkin_objects,
     output_path="Full_Refrigeration_System.json"
 ):
     zones = [
@@ -29,7 +29,7 @@ def export_full_refrigeration_system_to_json(
         mt_condensers + lt_condensers +
         mt_curves + lt_curves +
         case_objects + walkin_objects +
-        refrigeration_system_objects
+        system_and_casewalkin_objects
     )
 
     openstudio_json = {

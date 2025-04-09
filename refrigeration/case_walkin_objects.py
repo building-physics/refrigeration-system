@@ -69,19 +69,18 @@ def prepare_and_store_case_and_walkin_objects(case_data, walkin_data, selected_c
         walkin_data (dict): Walk-in data from DB
         selected_case_units (list): List of BuildingUnit objects for cases
         selected_walkin_units (list): List of BuildingUnit objects for walk-ins
+    Returns:
+        dict: A dictionary containing 'case_objects' and 'walkin_objects'
     """
-
-    globals()["case_data"] = case_data
-    globals()["walkin_data"] = walkin_data
-    globals()["selected_case_units"] = selected_case_units
-    globals()["selected_walkin_units"] = selected_walkin_units
 
     # Generate objects
     case_objects = generate_case_objects_from_data(case_data, selected_case_units)
     walkin_objects = generate_walkin_objects_from_data(walkin_data, selected_walkin_units)
 
-    # Store into globals
-    globals()["case_objects"] = case_objects
-    globals()["walkin_objects"] = walkin_objects
 
-    print("✅ Case and walk-in objects generated and stored in globals.")
+        # Return the generated objects
+    print("✅ Case and walk-in objects generated and stored")
+    return {
+        "case_objects": case_objects,
+        "walkin_objects": walkin_objects
+    }

@@ -181,6 +181,7 @@ def calculate_compressors_for_racks(racks, rack_type, template, redundancy=True)
     return compressors_per_rack
 
 def prepare_and_store_compressor_objects(mt_info, lt_info, template, db_path):
+    # potentially add summarize_compressor_assignment() -- possible previous eror -- temporarily add to main.py
     # 1. Load performance curves from database
     mt_power_curve, mt_capacity_curve, lt_power_curve, lt_capacity_curve = load_and_print_compressor_curves(db_path, template, verbose=False)
     # 2. Generate compressor objects using power curves
@@ -196,6 +197,5 @@ def prepare_and_store_compressor_objects(mt_info, lt_info, template, db_path):
         "lt_capacity_curve": lt_capacity_curve
     }
     # 4. Store in global scope
-    globals().update(result)
-    print("✅ Compressor objects and performance curves ready.")
+    print("✅ Compressor objects and performance curves objects generated and stored in the result.")
     return result
