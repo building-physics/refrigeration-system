@@ -74,11 +74,11 @@ def summarize_compressor_assignment(mt_racks, lt_racks, selected_template):
 
     print("\n🧊 MT Rack Compressor Assignment:")
     for info in mt_info:
-        print(f"Rack {info['rack_number']}: Load = {info['rack_load']:.2f} W → Compressors Needed = {info['compressors_needed']}")
+        print(f"Rack {info['rack_number']}: Load = {info['rack_load']:.2f} W → Number of Compressors Needed = {info['compressors_needed']}")
 
     print("\n❄️ LT Rack Compressor Assignment:")
     for info in lt_info:
-        print(f"Rack {info['rack_number']}: Load = {info['rack_load']:.2f} W → Compressors Needed = {info['compressors_needed']}")
+        print(f"Rack {info['rack_number']}: Load = {info['rack_load']:.2f} W → Number of Compressors Needed = {info['compressors_needed']}")
 
     # Specs 출력
     mt_capacity, mt_power, mt_cop, mt_eer = get_compressor_specs(selected_template, "MT")

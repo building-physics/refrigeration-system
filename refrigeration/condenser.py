@@ -23,13 +23,13 @@ def generate_condenser_objects(rack_info, operation_type, template):
 
         # Condenser capacity 
         if operation_type == "LT":
-            cond_capacity = 1.2 * load * (1 + 1 / 1.3)
+            cond_capacity = round(1.2 * load * (1 + 1 / 1.3),2)
         elif operation_type == "MT":
-            cond_capacity = 1.2 * load * (1 + 1 / 2.0)
+            cond_capacity = round(1.2 * load * (1 + 1 / 2.0),2)
         else:
             raise ValueError("Invalid operation type. Must be 'MT' or 'LT'.")
 
-        fan_power = 0.0441 * cond_capacity + 695
+        fan_power = round(0.0441 * cond_capacity + 695,2)
         condenser_name = f"{operation_type}_Rack{rack_num}_Condenser"
         curve_name = f"{condenser_name}_FanCurve"
 
