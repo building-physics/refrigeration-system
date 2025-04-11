@@ -1,2 +1,4 @@
 *.pyc
 database/.ipynb_checkpoints/LoadCalculation-backup-checkpoint.ipynb
+.ipynb_checkpoints/example_automated_mode-checkpoint.ipynb
+.ipynb_checkpoints/example_user_mode-checkpoint.ipynb
