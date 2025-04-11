@@ -45,16 +45,16 @@ refrigeration/
   Coordinates the full export process of refrigeration systems into OpenStudio JSON format.
 
 - **`json_io.py`**  
-  Reads and writes JSON files for compressor, condenser, system, and equipment objects.
+  Reads and writes JSON files for compressor, condenser, system, case, walkin objects.
 
 - **`mode_selection.py`**  
   Implements logic for selecting automated or user-defined modes and associated configurations.
 
 - **`rack_assignment.py`**  
-  Assigns refrigeration racks based on thermal loads and suction groupings.
+  Assigns refrigeration racks based on thermal loads and operation type groupings.
 
 - **`system_objects.py`**  
-  Builds high-level system objects (e.g., suction groups, refrigeration systems) and links components together.
+  Builds high-level system objects (e.g., operation type, refrigeration systems) and links components together.
 
 - **`utils.py`**  
   Helper functions used across modules for formatting, naming, and conversions.
