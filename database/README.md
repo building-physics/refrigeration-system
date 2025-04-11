@@ -1,18 +1,18 @@
 # Database Structure and Descriptions
 
-The updated modularized refrigeration database features three distinct templates: **Old, New, and Advanced System**. Each template includes a variety of display cases and walk-in units.
+The updated modularized refrigeration database features three distinct templates: **old, new, and advanced System**. Each template includes a variety of display cases and walk-in units.
 **This is a work in progress**
 
 ## Field Descriptions with Units
-This dataset includes refrigerated cases (`refrigeration_cases`), walk-in coolers (`refrigeration_walkins`), and compressor units (`refrigeration_compressors`).
+
+This dataset includes refrigerated cases (`refrigeration_cases`), walk-in coolers (`refrigeration_walkins`), compressor units (`refrigeration_compressors`), and building-category mappings (`building_category_mapping`).
 
 ---
 
 ## Refrigeration Cases (`refrigeration_cases`)
-**Data headers, descriptions, and units for refrigerated cases**
 
 | Field | Description | Unit |
-|-------|------------|------|
+|-------|-------------|------|
 | `case_name` | Unique identifier for the refrigerated case | N/A |
 | `template` | Classification of the case as Old, New, or Advanced refrigeration system | N/A |
 | `operation_type` | Indicates whether the case operates at Low Temperature (LT < -18°C) or Medium Temperature (MT -2°C to 4°C) | N/A |
@@ -29,27 +29,28 @@ This dataset includes refrigerated cases (`refrigeration_cases`), walk-in cooler
 | `latent_case_credit_curve_name` | Name of the cubic performance curve defining variation in latent case credit at off-rated conditions | N/A |
 | `fan_power` | Power consumption of the case’s fans per unit length | W/m |
 | `lighting_power` | Total lighting power required per unit length of the refrigerated case | W/m |
-| `case_lighting_schedule` | Schedule governing when the case lighting operates | N/A |
+| `case_lighting_schedules` | Schedule governing when the case lighting operates | N/A |
 | `fraction_of_lighting_energy_to_case` | Proportion of lighting energy contributing to the refrigerated case heat load | N/A |
 | `anti_sweat_power` | Electric anti-sweat heater power per unit length of the refrigerated case | W/m |
 | `anti_sweat_heater_control_type` | Method used to regulate the anti-sweat heaters | N/A |
-| `fraction_of_anti_sweat_heater_energy_to_case` | Proportion of anti-sweat heater energy directly contributing to case heat load | N/A |
+| `fraction_of_anti_sweat_heater_energy_to_cases` | Proportion of anti-sweat heater energy directly contributing to case heat load | N/A |
 | `defrost_power` | Electrical power used for defrosting per unit length of the refrigerated case | W/m |
 | `defrost_type` | Method of defrosting used | N/A |
-| `defrost_schedule` | Schedule indicating when defrost cycles occur | N/A |
+| `defrost_schedules` | Schedule indicating when defrost cycles occur | N/A |
 | `drip_down_schedules` | Indicates whether additional time is needed for condensate drainage after defrost | N/A |
 | `defrost_energy_correction_curve_type` | Type of correction curve modifying defrost energy use at off-rated conditions | N/A |
 | `defrost_energy_correction_curve_name` | Cubic performance curve defining defrost energy variation at different conditions | N/A |
 | `HVAC_return_air_fraction` | Fraction of HVAC return air passing beneath the refrigerated case, if applicable | N/A |
 | `restocking_schedule` | Schedule indicating when the refrigerated case is restocked with products | N/A |
 | `case_credit_fraction_schedule` | Schedule defining the fraction of both sensible and latent case credits applied to the zone or HVAC return air | N/A |
+| `description` | Additional descriptive info for the case group | N/A |
+
 ---
 
-## Walk-in Coolers (`refrigeration_walkins`)
-**Data headers, descriptions, and units for walk-in coolers**
+## Walk-ins (`refrigeration_walkins`)
 
 | Field | Description | Unit |
-|-------|------------|------|
+|-------|-------------|------|
 | `walkin_name` | Unique identifier for the walk-in cooler | N/A |
 | `template` | Classification of the walk-in cooler as Old, New, or Advanced refrigeration system | N/A |
 | `operation_type` | Identifies whether the walk-in cooler operates at Low Temperature (LT < -18°C) or Medium Temperature (MT -2°C to 4°C) | N/A |
@@ -66,9 +67,9 @@ This dataset includes refrigerated cases (`refrigeration_cases`), walk-in cooler
 | `defrost_schedule` | Schedule indicating when defrost cycles occur | N/A |
 | `drip_down_schedule` | Indicates whether additional time is needed for condensate drainage after defrost | N/A |
 | `defrost_power` | Power consumption for defrosting | W |
-| `temperature_termination_defrost_fraction_to_ice` | Fraction of defrost energy contributing to ice melting | N/A |a
+| `temperature_termination_defrost_fraction_to_ice` | Fraction of defrost energy contributing to ice melting | N/A |
 | `insulated_floor_uvalue` | Thermal transmittance (U-value) of the insulated floor | W/m²·K |
-| `total_insulated_surface_area_facing_zone` | Total insulated surface area (walls and ceilings) facing the conditioned zone | m² |
+| `total_insulatedsurface_area_facing_zone` | Total insulated surface area (walls and ceilings) facing the conditioned zone | m² |
 | `insulated_surface_uvalue_facing_zone` | Thermal transmittance (U-value) of insulated surfaces facing the zone | W/m²·K |
 | `area_of_glass_reachin_doors_facing_zone` | Total area of glass reach-in doors facing the conditioned zone | m² |
 | `reachin_door_uvalue` | Thermal transmittance (U-value) of reach-in doors | W/m²·K |
@@ -77,6 +78,7 @@ This dataset includes refrigerated cases (`refrigeration_cases`), walk-in cooler
 | `stocking_door_u` | Thermal transmittance (U-value) of stocking doors | W/m²·K |
 | `stocking_door_schedule` | Schedule defining the fraction of time stocking doors are open | N/A |
 | `stocking_door_opening_protection` | Type of stocking door opening protection used | N/A |
+| `description` | Additional descriptive info for the walk-in | N/A |
 
 ---
 
@@ -118,7 +120,21 @@ Curve Output = C1 + C2*x + C3*x² + C4*y + C5*y² + C6*x*y + C7*x³ + C8*y³ + C
 | `max_val_y` | Maximum value for the y variable (discharge pressure temperature) | °C |
 
 
+---
 
+## Building Category Mapping (`building_category_mapping`)
+
+| Field | Description | Unit |
+|-------|-------------|------|
+| `building_type` | Building type (e.g., SuperMarket, Convenience Store) | N/A |
+| `system_type` | System name (e.g., case, walkin) | N/A |
+| `template` | Template classification (old, new, advanced) | N/A |
+| `base_name` | Case/walk-in reference name | N/A |
+| `category` | Category for use (e.g., Deli, Ice Cream, Bloom Box) | N/A |
+| `number_of_units` | Number of units for the given category | count |
+| `description` | Optional notes for mapping | N/A |
+
+---
 
 
 ## **License**
