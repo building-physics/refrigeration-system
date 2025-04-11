@@ -1,0 +1,147 @@
+{
+  "Version": "0.2.1",
+  "Building": "User Defined System",
+  "objects": [
+    {
+      "type": "OS:ThermalZone",
+      "name": "MainSales"
+    },
+    {
+      "type": "OS:ThermalZone",
+      "name": "ActiveStorage"
+    },
+    {
+      "type": "OS:Refrigeration:Condenser:AirCooled",
+      "name": "MT_Rack1_Condenser",
+      "RatedEffectiveTotalHeatRejectionRate": 146960.35,
+      "FanPower": 7175.95,
+      "RatedSubcoolingTemperatureDifference": 5,
+      "FanPowerCurve": "MT_Rack1_Condenser_FanCurve",
+      "MinimumCondensingTemperature": 48.8889
+    },
+    {
+      "type": "OS:Refrigeration:Condenser:AirCooled",
+      "name": "MT_Rack2_Condenser",
+      "RatedEffectiveTotalHeatRejectionRate": 45238.18,
+      "FanPower": 2690.0,
+      "RatedSubcoolingTemperatureDifference": 5,
+      "FanPowerCurve": "MT_Rack2_Condenser_FanCurve",
+      "MinimumCondensingTemperature": 48.8889
+    },
+    {
+      "type": "OS:Refrigeration:Condenser:AirCooled",
+      "name": "MT_Rack3_Condenser",
+      "RatedEffectiveTotalHeatRejectionRate": 53813.12,
+      "FanPower": 3068.16,
+      "RatedSubcoolingTemperatureDifference": 5,
+      "FanPowerCurve": "MT_Rack3_Condenser_FanCurve",
+      "MinimumCondensingTemperature": 48.8889
+    },
+    {
+      "type": "OS:Refrigeration:Condenser:AirCooled",
+      "name": "MT_Rack4_Condenser",
+      "RatedEffectiveTotalHeatRejectionRate": 46033.56,
+      "FanPower": 2725.08,
+      "RatedSubcoolingTemperatureDifference": 5,
+      "FanPowerCurve": "MT_Rack4_Condenser_FanCurve",
+      "MinimumCondensingTemperature": 48.8889
+    },
+    {
+      "type": "OS:Refrigeration:Condenser:AirCooled",
+      "name": "LT_Rack1_Condenser",
+      "RatedEffectiveTotalHeatRejectionRate": 37415.41,
+      "FanPower": 2345.02,
+      "RatedSubcoolingTemperatureDifference": 0,
+      "FanPowerCurve": "LT_Rack1_Condenser_FanCurve",
+      "MinimumCondensingTemperature": 40.56
+    },
+    {
+      "type": "OS:Refrigeration:Condenser:AirCooled",
+      "name": "LT_Rack2_Condenser",
+      "RatedEffectiveTotalHeatRejectionRate": 35569.61,
+      "FanPower": 2263.62,
+      "RatedSubcoolingTemperatureDifference": 0,
+      "FanPowerCurve": "LT_Rack2_Condenser_FanCurve",
+      "MinimumCondensingTemperature": 40.56
+    },
+    {
+      "type": "OS:Refrigeration:Condenser:AirCooled",
+      "name": "LT_Rack3_Condenser",
+      "RatedEffectiveTotalHeatRejectionRate": 1408.87,
+      "FanPower": 757.13,
+      "RatedSubcoolingTemperatureDifference": 0,
+      "FanPowerCurve": "LT_Rack3_Condenser_FanCurve",
+      "MinimumCondensingTemperature": 40.56
+    },
+    {
+      "type": "OS:Curve:Linear",
+      "name": "MT_Rack1_Condenser_FanCurve",
+      "Coefficient1Constant": 0,
+      "Coefficient2x": 26242.919642857145,
+      "MinimumValueofx": 0,
+      "MaximumValueofx": 1,
+      "InputUnitTypeforX": "Dimensionless",
+      "OutputUnitType": "Dimensionless"
+    },
+    {
+      "type": "OS:Curve:Linear",
+      "name": "MT_Rack2_Condenser_FanCurve",
+      "Coefficient1Constant": 0,
+      "Coefficient2x": 8078.2464285714295,
+      "MinimumValueofx": 0,
+      "MaximumValueofx": 1,
+      "InputUnitTypeforX": "Dimensionless",
+      "OutputUnitType": "Dimensionless"
+    },
+    {
+      "type": "OS:Curve:Linear",
+      "name": "MT_Rack3_Condenser_FanCurve",
+      "Coefficient1Constant": 0,
+      "Coefficient2x": 9609.485714285714,
+      "MinimumValueofx": 0,
+      "MaximumValueofx": 1,
+      "InputUnitTypeforX": "Dimensionless",
+      "OutputUnitType": "Dimensionless"
+    },
+    {
+      "type": "OS:Curve:Linear",
+      "name": "MT_Rack4_Condenser_FanCurve",
+      "Coefficient1Constant": 0,
+      "Coefficient2x": 8220.278571428571,
+      "MinimumValueofx": 0,
+      "MaximumValueofx": 1,
+      "InputUnitTypeforX": "Dimensionless",
+      "OutputUnitType": "Dimensionless"
+    },
+    {
+      "type": "OS:Curve:Linear",
+      "name": "LT_Rack1_Condenser_FanCurve",
+      "Coefficient1Constant": 0,
+      "Coefficient2x": 6681.323214285715,
+      "MinimumValueofx": 0,
+      "MaximumValueofx": 1,
+      "InputUnitTypeforX": "Dimensionless",
+      "OutputUnitType": "Dimensionless"
+    },
+    {
+      "type": "OS:Curve:Linear",
+      "name": "LT_Rack2_Condenser_FanCurve",
+      "Coefficient1Constant": 0,
+      "Coefficient2x": 6351.716071428572,
+      "MinimumValueofx": 0,
+      "MaximumValueofx": 1,
+      "InputUnitTypeforX": "Dimensionless",
+      "OutputUnitType": "Dimensionless"
+    },
+    {
+      "type": "OS:Curve:Linear",
+      "name": "LT_Rack3_Condenser_FanCurve",
+      "Coefficient1Constant": 0,
+      "Coefficient2x": 251.58392857142857,
+      "MinimumValueofx": 0,
+      "MaximumValueofx": 1,
+      "InputUnitTypeforX": "Dimensionless",
+      "OutputUnitType": "Dimensionless"
+    }
+  ]
+}

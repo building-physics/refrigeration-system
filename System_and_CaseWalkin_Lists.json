@@ -1,0 +1,149 @@
+{
+  "Version": "0.2.1",
+  "Building": "User Defined System",
+  "objects": [
+    {
+      "type": "OS:ThermalZone",
+      "name": "MainSales"
+    },
+    {
+      "type": "OS:ThermalZone",
+      "name": "ActiveStorage"
+    },
+    {
+      "type": "OS:Refrigeration:System",
+      "name": "Supermarket Rack MT 1",
+      "CompressorListName": "Compressor_List_MT_Rack1",
+      "CondenserName": "Condenser_MT_Rack1",
+      "CaseAndWalkInListName": "Supermarket Rack MT 1_CaseWalkinList",
+      "RefrigerantType": "R404A",
+      "SuctionTemperature": -6.6667,
+      "MinimumCondensingTemperature": 48.8889,
+      "EndUseSubcategory": "Refrigeration"
+    },
+    {
+      "type": "OS:Refrigeration:CaseAndWalkInList",
+      "name": "Supermarket Rack MT 1_CaseWalkinList",
+      "CaseAndWalkInNames": [
+        "SuperMarket advanced MT Vertical Open - Others - Prepared Foods"
+      ]
+    },
+    {
+      "type": "OS:Refrigeration:System",
+      "name": "Supermarket Rack MT 2",
+      "CompressorListName": "Compressor_List_MT_Rack2",
+      "CondenserName": "Condenser_MT_Rack2",
+      "CaseAndWalkInListName": "Supermarket Rack MT 2_CaseWalkinList",
+      "RefrigerantType": "R404A",
+      "SuctionTemperature": -6.6667,
+      "MinimumCondensingTemperature": 48.8889,
+      "EndUseSubcategory": "Refrigeration"
+    },
+    {
+      "type": "OS:Refrigeration:CaseAndWalkInList",
+      "name": "Supermarket Rack MT 2_CaseWalkinList",
+      "CaseAndWalkInNames": [
+        "SuperMarket advanced MT Vertical Open - Meat - Meat"
+      ]
+    },
+    {
+      "type": "OS:Refrigeration:System",
+      "name": "Supermarket Rack MT 3",
+      "CompressorListName": "Compressor_List_MT_Rack3",
+      "CondenserName": "Condenser_MT_Rack3",
+      "CaseAndWalkInListName": "Supermarket Rack MT 3_CaseWalkinList",
+      "RefrigerantType": "R404A",
+      "SuctionTemperature": -6.6667,
+      "MinimumCondensingTemperature": 48.8889,
+      "EndUseSubcategory": "Refrigeration"
+    },
+    {
+      "type": "OS:Refrigeration:CaseAndWalkInList",
+      "name": "Supermarket Rack MT 3_CaseWalkinList",
+      "CaseAndWalkInNames": [
+        "SuperMarket advanced MT Service - Others - Bakery",
+        "SuperMarket advanced MT Vertical Open - Beverage - Beverage",
+        "SuperMarket advanced MT Walk-in Cooler - 660SF with glass door - Dairy ",
+        "SuperMarket advanced MT Walk-in Cooler - 600SF with no glass door - Meat Prep"
+      ]
+    },
+    {
+      "type": "OS:Refrigeration:System",
+      "name": "Supermarket Rack MT 4",
+      "CompressorListName": "Compressor_List_MT_Rack4",
+      "CondenserName": "Condenser_MT_Rack4",
+      "CaseAndWalkInListName": "Supermarket Rack MT 4_CaseWalkinList",
+      "RefrigerantType": "R404A",
+      "SuctionTemperature": -6.6667,
+      "MinimumCondensingTemperature": 48.8889,
+      "EndUseSubcategory": "Refrigeration"
+    },
+    {
+      "type": "OS:Refrigeration:CaseAndWalkInList",
+      "name": "Supermarket Rack MT 4_CaseWalkinList",
+      "CaseAndWalkInNames": [
+        "SuperMarket advanced MT Service - Meat - Meat",
+        "SuperMarket advanced MT Walk-in Cooler - 480SF with no glass door - Meat",
+        "SuperMarket advanced MT Walk-in Cooler - 480SF with glass door - Beer",
+        "SuperMarket advanced MT Walk-in Cooler - 400SF with no glass door - Produce ",
+        "SuperMarket advanced MT Walk-in Cooler - 120SF with no glass door - Deli ",
+        "SuperMarket advanced MT Walk-in Cooler - 80SF with no glass door - Fish",
+        "SuperMarket advanced MT Walk-in Cooler - 64SF with no glass door - Bloom Box"
+      ]
+    },
+    {
+      "type": "OS:Refrigeration:System",
+      "name": "Supermarket Rack LT 5",
+      "CompressorListName": "Compressor_List_LT_Rack5",
+      "CondenserName": "Condenser_LT_Rack5",
+      "CaseAndWalkInListName": "Supermarket Rack LT 5_CaseWalkinList",
+      "RefrigerantType": "R404A",
+      "SuctionTemperature": -31.67,
+      "MinimumCondensingTemperature": 40.56,
+      "EndUseSubcategory": "Refrigeration"
+    },
+    {
+      "type": "OS:Refrigeration:CaseAndWalkInList",
+      "name": "Supermarket Rack LT 5_CaseWalkinList",
+      "CaseAndWalkInNames": [
+        "advanced LT Reach-in - Ice Cream"
+      ]
+    },
+    {
+      "type": "OS:Refrigeration:System",
+      "name": "Supermarket Rack LT 6",
+      "CompressorListName": "Compressor_List_LT_Rack6",
+      "CondenserName": "Condenser_LT_Rack6",
+      "CaseAndWalkInListName": "Supermarket Rack LT 6_CaseWalkinList",
+      "RefrigerantType": "R404A",
+      "SuctionTemperature": -31.67,
+      "MinimumCondensingTemperature": 40.56,
+      "EndUseSubcategory": "Refrigeration"
+    },
+    {
+      "type": "OS:Refrigeration:CaseAndWalkInList",
+      "name": "Supermarket Rack LT 6_CaseWalkinList",
+      "CaseAndWalkInNames": [
+        "advanced LT Reach-in - Frozen Food"
+      ]
+    },
+    {
+      "type": "OS:Refrigeration:System",
+      "name": "Supermarket Rack LT 7",
+      "CompressorListName": "Compressor_List_LT_Rack7",
+      "CondenserName": "Condenser_LT_Rack7",
+      "CaseAndWalkInListName": "Supermarket Rack LT 7_CaseWalkinList",
+      "RefrigerantType": "R404A",
+      "SuctionTemperature": -31.67,
+      "MinimumCondensingTemperature": 40.56,
+      "EndUseSubcategory": "Refrigeration"
+    },
+    {
+      "type": "OS:Refrigeration:CaseAndWalkInList",
+      "name": "Supermarket Rack LT 7_CaseWalkinList",
+      "CaseAndWalkInNames": [
+        "SuperMarket advanced LT Coffin - Ice Cream - Ice Cream"
+      ]
+    }
+  ]
+}
