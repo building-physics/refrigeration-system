@@ -65,7 +65,8 @@ The modeling framework provides two modes of operation:
 Automatically configures a predefined SuperMarket setup including:
 - Case/Walk-in units
 - Rack assignments
-- Refrigerant templates  
+- Refrigerant templates
+- Condenser object assignment and curve generation
 
 → **Ideal for quick simulations and standard scenarios**
 
@@ -73,7 +74,8 @@ Automatically configures a predefined SuperMarket setup including:
 Lets users:
 - Select specific refrigeration cases/walk-ins
 - Assign custom templates and racks
-- Manually control system configurations  
+- Automatically generate OpenStuio JSON files for selected units
+
 
 → **Great for detailed design and custom modeling**
 
