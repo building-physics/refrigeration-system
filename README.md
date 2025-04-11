@@ -11,6 +11,11 @@ This repository currently contains the refrigeration system database and Python-
 ---
 
 ## 📁 Project Structure
+This project includes a modular Python package under the `refrigeration/` directory.  
+➡️ **[Click here for detailed module descriptions](refrigeration/README.md)**
+
+It also includes a structured database for cases, walk-ins, and compressor data.  
+➡️ **[Click here for database table descriptions](database/README.md)**
 
 - **`main.ipynb`**: Primary execution file to run the full modeling and export workflow.
 - **`example_automated_mode.ipynb`**: Example file demonstrating **automated** mode with default SuperMarket configuration.
