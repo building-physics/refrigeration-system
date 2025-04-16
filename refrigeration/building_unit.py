@@ -1,4 +1,19 @@
 import sqlite3
+ZONE_MAPPING = {
+    "SuperMarket":{
+        "case_zone": "MainSales",
+        "walkin_zone": "ActiveStorage"
+    },
+    "ConvenienceStore": {
+        "case_zone": "conv_casezone",
+        "walkin_zone": "conv_walkinzone"
+    }
+}
+
+BUILDING_LABELS = {
+    "SuperMarket": "SuperMarket",
+    "ConvenienceStore": "Convenience Store (Not Available yet)"
+}
 
 class BuildingUnit:
     def __init__(self, building_type, base_name, category, number_of_units=None, template=None, user_mode=False, zone_name=None):
@@ -7,9 +22,15 @@ class BuildingUnit:
         self.category = category
         self.template = template
         self.user_mode = user_mode
-        self.zone_name = zone_name or ("MainSales" if "walk-in" not in base_name.lower() else "ActiveStorage")
         self.number_of_units = number_of_units if number_of_units is not None else 1
 
+        is_walkin = "walk-in" in base_name.lower()
+
+        # Zone mapping
+        self.zone_name = (
+            zone_name or ZONE_MAPPING.get(building_type,{}).get("walkin_zone" if is_walkin else "case_name") or 
+            ("ActiveStorage" if is_walkin else "MainSales")
+        )
         # Define naming conventions
         if self.user_mode:
             self.case_name = base_name
