@@ -24,7 +24,7 @@ def user_mode():
 
     print("\n--- Add Case Units ---")
     while True:
-        case_name = input("Enter case name (or 'done' to finish): ")
+        case_name = input("Enter case name (or 'done' to finish): ").strip()
         if case_name.lower() == 'done':
             break
         try:
@@ -32,13 +32,14 @@ def user_mode():
         except ValueError:
             print("❌ Invalid number. Please enter an integer.")
             continue
+
         selected_case_units.append(
-        BuildingUnit("User", f"{selected_template} {case_name}", "Category", number_of_units, template=selected_template, user_mode=True)
+            BuildingUnit("User", case_name, "Category", number_of_units, template=selected_template, user_mode=True)
         )
 
     print("\n--- Add Walk-in Units ---")
     while True:
-        walkin_name = input("Enter walk-in name (or 'done' to finish): ")
+        walkin_name = input("Enter walk-in name (or 'done' to finish): ").strip()
         if walkin_name.lower() == 'done':
             break
         try:
@@ -46,18 +47,14 @@ def user_mode():
         except ValueError:
             print("❌ Invalid number. Please enter an integer.")
             continue
-        selected_walkin_units.append(
-            BuildingUnit("User", f"{selected_template} {walkin_name}", "Category", number_of_units, template=selected_template, user_mode=True)
-        )
-    
-    print("\n--- Add Zone names ---")
-    case_zone_name = input("Enter zone name for refrigeration *cases* [default: MainSales]: ").strip()
-    if not case_zone_name:
-        case_zone_name = "MainSales"
-    walkin_zone_name = input("Enter zone name for *walkins* [default: ActiveStorage]: ").strip()
-    if not walkin_zone_name:
-        walkin_zone_name = "ActiveStorage"
 
+        selected_walkin_units.append(
+            BuildingUnit("User", walkin_name, "Category", number_of_units, template=selected_template, user_mode=True)
+        )
+
+    print("\n--- Add Zone names ---")
+    case_zone_name = input("Enter zone name for refrigeration *cases* [default: MainSales]: ").strip() or "MainSales"
+    walkin_zone_name = input("Enter zone name for *walkins* [default: ActiveStorage]: ").strip() or "ActiveStorage"
 
     return selected_case_units, selected_walkin_units, selected_template, case_zone_name, walkin_zone_name
 

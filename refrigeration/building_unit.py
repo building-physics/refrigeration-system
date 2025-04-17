@@ -18,29 +18,23 @@ BUILDING_LABELS = {
 class BuildingUnit:
     def __init__(self, building_type, base_name, category, number_of_units=None, template=None, user_mode=False, zone_name=None):
         self.building_type = building_type
-        self.base_name = base_name
+        self.base_name = base_name.strip()
         self.category = category
         self.template = template
         self.user_mode = user_mode
+        self.zone_name = zone_name or ("MainSales" if "walk-in" not in base_name.lower() else "ActiveStorage")
         self.number_of_units = number_of_units if number_of_units is not None else 1
 
-        is_walkin = "walk-in" in base_name.lower()
+        base_clean = self.base_name.replace(",", "")
 
-        # Zone mapping
-        self.zone_name = (
-            zone_name or ZONE_MAPPING.get(building_type,{}).get("walkin_zone" if is_walkin else "case_name") or 
-            ("ActiveStorage" if is_walkin else "MainSales")
-        )
         # Define naming conventions
+        self.case_name = f"{self.template} {base_clean}"
+        self.walkin_name = f"{self.template} {base_clean}"
+
         if self.user_mode:
-            self.case_name = base_name
-            self.walkin_name = base_name
-            self.osm_name = f"User {template} {base_name}"
+            self.osm_name = f"User {self.template} {base_clean}"
         else:
-            base_clean = self.base_name.replace(",", "")
-            self.case_name = f"{self.template} {base_clean}"
-            self.walkin_name = f"{self.template} {base_clean}"
-            self.osm_name = f"{building_type} {template} {base_name} - {category}"
+            self.osm_name = f"{self.building_type} {self.template} {base_clean} - {self.category}"
 
     def __repr__(self):
         return f'"osm name": "{self.osm_name}", "case_name": "{self.case_name}", "number_of_units": {self.number_of_units}'
