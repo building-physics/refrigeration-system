@@ -97,6 +97,6 @@ def automated_mode(db_path):
         selected_case_units = system.cases
         selected_walkin_units = system.walkins
 
-        return selected_case_units, selected_walkin_units, selected_template
+        return selected_case_units, selected_walkin_units, selected_template, zone_map["case_zone"], zone_map["walkin_zone"]
 
-    return [], [], selected_template, "MainSales", "ActiveStorage"
+    return [], [], selected_template, zone_map["case_zone"], zone_map["walkin_zone"]
