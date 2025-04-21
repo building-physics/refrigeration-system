@@ -88,7 +88,7 @@ Refrigeration cases and walk-ins are assigned to Medium or Low Temperature racks
 - Loads are sorted and packed efficiently to minimize the number of racks.
 - Large loads for same case type are split across racks
 
- →Enables practical equipment sizing while supporting fast, scalable rack assignment.
+ → Enables practical equipment sizing while supporting fast, scalable rack assignment.
 
 ---
 
@@ -127,8 +127,8 @@ Systems are categorized by suction temperature level:
 
 Each refrigeration case and walk-in is assigned to a thermal zone in the OpenStudio model.
 
-- **Cases** are placed in `"MainSales"` or custom zones
-- **Walk-ins** are placed in `"ActiveStorage"` or user-defined zones
+- **Cases** are placed in `"MainSales"` or a custom zones
+- **Walk-ins** are placed in `"ActiveStorage"` or a user-defined zone
 
 → Zones can be defined interactively (**user mode**) or selected automatically (**automated mode**).
 
