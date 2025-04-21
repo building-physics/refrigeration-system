@@ -1,17 +1,6 @@
 import sqlite3
 
 def get_data_from_db(db_path, selected_case_units, selected_walkin_units):
-    """
-    Load case and walk-in data from the database using selected units.
-
-    Args:
-        db_path (str): Path to the SQLite DB.
-        selected_case_units (list): List of CaseUnit objects (with .case_name and .number_of_units).
-        selected_walkin_units (list): List of WalkInUnit objects (with .walkin_name and .number_of_units).
-
-    Returns:
-        Tuple[dict, dict]: (case_data, walkin_data)
-    """
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
@@ -20,11 +9,21 @@ def get_data_from_db(db_path, selected_case_units, selected_walkin_units):
 
     # CASES ---------------------------------
     case_counts = {}
-    for unit in selected_case_units:
-        key = unit.case_name.lower()
-        case_counts[key] = case_counts.get(key, 0) + unit.number_of_units
+    case_lookup = {}
 
-    for case_name, count in case_counts.items():
+    for unit in selected_case_units:
+        osm_name = unit.osm_name
+        base_name = unit.base_name
+        count = unit.number_of_units
+        template = unit.template
+        full_case_name = f"{template} {base_name}"
+
+        case_counts[osm_name] = count
+        case_lookup[osm_name] = full_case_name  # Use base_name for query
+
+    for osm_name, count in case_counts.items():
+        base_name = case_lookup[osm_name]
+
         cursor.execute("""            
             SELECT 
                 case_name, template, operation_type,
@@ -40,22 +39,33 @@ def get_data_from_db(db_path, selected_case_units, selected_walkin_units):
                 HVAC_return_air_fraction, restocking_schedule, case_credit_fraction_schedule
             FROM refrigeration_cases 
             WHERE lower(case_name) = ?
-            """, (case_name,))
+            """, (base_name.lower(),))
         row = cursor.fetchone()
+
         if row:
             columns = [col[0] for col in cursor.description]
             row_dict = dict(zip(columns, row))
             row_dict["unit_count"] = count
             row_dict["total_rated_capacity"] = row_dict["rated_capacity"] * row_dict["unit_length"] * count
-            case_data[row[0]] = row_dict
+            case_data[osm_name] = row_dict
 
     # WALK-INS -------------------------------
     walkin_counts = {}
-    for unit in selected_walkin_units:
-        key = unit.walkin_name.lower()
-        walkin_counts[key] = walkin_counts.get(key, 0) + unit.number_of_units
+    walkin_lookup = {}
 
-    for walkin_name, count in walkin_counts.items():
+    for unit in selected_walkin_units:
+        osm_name = unit.osm_name
+        base_name = unit.base_name
+        count = unit.number_of_units
+        template = unit.template
+        full_walkin_name = f"{unit.template} {unit.base_name}"
+
+        walkin_counts[osm_name] = count
+        walkin_lookup[osm_name] = full_walkin_name
+
+    for osm_name, count in walkin_counts.items():
+        base_name = walkin_lookup[osm_name]
+
         cursor.execute("""
              SELECT
                 walkin_name, template, operation_type,
@@ -66,14 +76,15 @@ def get_data_from_db(db_path, selected_case_units, selected_walkin_units):
                 reachin_door_uvalue, area_of_glass_reachin_doors_facing_zone
             FROM refrigeration_walkins
             WHERE lower(walkin_name) = ?
-            """, (walkin_name,))
+            """, (base_name.lower(),))
         row = cursor.fetchone()
+
         if row:
             columns = [col[0] for col in cursor.description]
             row_dict = dict(zip(columns, row))
             row_dict["number_of_units"] = count
             row_dict["total_rated_capacity"] = row_dict["rated_capacity"] * count
-            walkin_data[row[0]] = row_dict
+            walkin_data[osm_name] = row_dict
 
     conn.close()
     return case_data, walkin_data

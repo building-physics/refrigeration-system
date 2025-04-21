@@ -5,11 +5,13 @@ import json
 def export_cases_and_walkins_to_json(
     case_objects,
     walkin_objects,
+    case_zone_name="MainSales",
+    walkin_zone_name="ActiveStorage",
     output_path="Cases_and_Walkins.json"
 ):
     zones = [
-        {"type": "OS:ThermalZone", "name": "MainSales"},
-        {"type": "OS:ThermalZone", "name": "ActiveStorage"}
+        {"type": "OS:ThermalZone", "name": case_zone_name},
+        {"type": "OS:ThermalZone", "name": walkin_zone_name}
     ]
 
     objects = zones + case_objects + walkin_objects
@@ -35,11 +37,13 @@ def export_existing_compressors_to_json(
     mt_capacity_curve,
     lt_power_curve,
     lt_capacity_curve,
+    case_zone_name="MainSales",
+    walkin_zone_name="ActiveStorage",
     output_path="All_Compressors.json"
 ):
     zones = [
-        {"type": "OS:ThermalZone", "name": "MainSales"},
-        {"type": "OS:ThermalZone", "name": "ActiveStorage"}
+        {"type": "OS:ThermalZone", "name": case_zone_name},
+        {"type": "OS:ThermalZone", "name": walkin_zone_name}
     ]
     # Concatenate the objects correctly into a list
     objects = [
@@ -70,11 +74,13 @@ def export_existing_condensers_to_json(
     lt_condensers,
     mt_curves,
     lt_curves,
+    case_zone_name="MainSales",
+    walkin_zone_name="ActiveStorage",
     output_path="All_Condensers.json"
 ):
     zones = [
-        {"type": "OS:ThermalZone", "name": "MainSales"},
-        {"type": "OS:ThermalZone", "name": "ActiveStorage"}
+        {"type": "OS:ThermalZone", "name": case_zone_name},
+        {"type": "OS:ThermalZone", "name": walkin_zone_name}
     ]
 
     objects = (
@@ -101,11 +107,13 @@ def export_existing_condensers_to_json(
 # System + Case list
 def export_system_and_casewalkin_lists_to_json(
     refrigeration_system_objects,
+    case_zone_name="MainSales",
+    walkin_zone_name="ActiveStorage",
     output_path="case_walkin_list.json"
 ):
     zones = [
-        {"type": "OS:ThermalZone", "name": "MainSales"},
-        {"type": "OS:ThermalZone", "name": "ActiveStorage"}
+        {"type": "OS:ThermalZone", "name": case_zone_name},
+        {"type": "OS:ThermalZone", "name": walkin_zone_name}
     ]
 
     objects = zones + refrigeration_system_objects

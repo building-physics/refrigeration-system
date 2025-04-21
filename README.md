@@ -81,6 +81,17 @@ Lets users:
 
 ---
 
+## 🧮 Rack Assignment Logic
+
+Refrigeration cases and walk-ins are assigned to Medium or Low Temperature racks using a First Fit Decreasing (FFD) algorithm.
+- Each MT/LT rack has a configurable capacity limit
+- Loads are sorted and packed efficiently to minimize the number of racks.
+- Large loads for same case type are split across racks
+
+ → Enables practical equipment sizing while supporting fast, scalable rack assignment.
+
+---
+
 ## 🧰 Template Selection: System Type and Era
 
 System **template** determines performance assumptions, curve data, and equipment configuration.
@@ -112,7 +123,16 @@ Systems are categorized by suction temperature level:
 
 ---
 
+## 🗺️ Zone Assignment for Refrigeration Units
 
+Each refrigeration case and walk-in is assigned to a thermal zone in the OpenStudio model.
+
+- **Cases** are placed in `"MainSales"` or a custom zones
+- **Walk-ins** are placed in `"ActiveStorage"` or a user-defined zone
+
+→ Zones can be defined interactively (**user mode**) or selected automatically (**automated mode**).
+
+---
 
 ## 📜 License
 

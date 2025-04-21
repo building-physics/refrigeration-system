@@ -15,11 +15,13 @@ def export_full_refrigeration_system_to_json(
     case_objects,
     walkin_objects,
     system_and_casewalkin_objects,
+    case_zone_name="MainSales",
+    walkin_zone_name="ActiveStorage",
     output_path="Full_Refrigeration_System.json"
 ):
     zones = [
-        {"type": "OS:ThermalZone", "name": "MainSales"},
-        {"type": "OS:ThermalZone", "name": "ActiveStorage"}
+        {"type": "OS:ThermalZone", "name": case_zone_name},
+        {"type": "OS:ThermalZone", "name": walkin_zone_name}
     ]
 
     all_objects = (

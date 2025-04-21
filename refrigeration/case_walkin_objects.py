@@ -1,5 +1,5 @@
 
-def generate_case_objects_from_data(case_data, selected_case_units):
+def generate_case_objects_from_data(case_data, selected_case_units, case_zone_name):
     """Generate OS:Refrigeration:Case JSON objects based on database data and unit zones."""
     name_to_osm = {unit.case_name: unit.osm_name for unit in selected_case_units}
     name_to_zone = {unit.case_name: unit.zone_name for unit in selected_case_units}
@@ -7,7 +7,7 @@ def generate_case_objects_from_data(case_data, selected_case_units):
     objects = []
     for case_name, info in case_data.items():
         osm_name = name_to_osm.get(case_name, case_name)
-        zone_name = name_to_zone.get(case_name, "MainSales")
+        zone_name = name_to_zone.get(case_name, case_zone_name)
 
         obj = {
             "type": "OS:Refrigeration:Case",
@@ -28,7 +28,7 @@ def generate_case_objects_from_data(case_data, selected_case_units):
     return objects
 
 
-def generate_walkin_objects_from_data(walkin_data, selected_walkin_units):
+def generate_walkin_objects_from_data(walkin_data, selected_walkin_units, walkin_zone_name):
     """Generate OS:Refrigeration:WalkIn JSON objects based on database data and unit zones."""
     name_to_osm = {unit.walkin_name: unit.osm_name for unit in selected_walkin_units}
     name_to_zone = {unit.walkin_name: unit.zone_name for unit in selected_walkin_units}
@@ -36,7 +36,7 @@ def generate_walkin_objects_from_data(walkin_data, selected_walkin_units):
     objects = []
     for walkin_name, info in walkin_data.items():
         osm_name = name_to_osm.get(walkin_name, walkin_name)
-        zone_name = name_to_zone.get(walkin_name, "ActiveStorage")
+        zone_name = name_to_zone.get(walkin_name, walkin_zone_name)
 
         obj = {
             "type": "OS:Refrigeration:WalkIn",
@@ -60,22 +60,12 @@ def generate_walkin_objects_from_data(walkin_data, selected_walkin_units):
         objects.append(obj)
     return objects
 
-def prepare_and_store_case_and_walkin_objects(case_data, walkin_data, selected_case_units, selected_walkin_units):
-    """
-    Generate and store refrigeration case and walk-in JSON objects into global variables.
+def prepare_and_store_case_and_walkin_objects(case_data, walkin_data, selected_case_units, selected_walkin_units, case_zone_name, walkin_zone_name):
 
-    Args:
-        case_data (dict): Case data from DB
-        walkin_data (dict): Walk-in data from DB
-        selected_case_units (list): List of BuildingUnit objects for cases
-        selected_walkin_units (list): List of BuildingUnit objects for walk-ins
-    Returns:
-        dict: A dictionary containing 'case_objects' and 'walkin_objects'
-    """
 
     # Generate objects
-    case_objects = generate_case_objects_from_data(case_data, selected_case_units)
-    walkin_objects = generate_walkin_objects_from_data(walkin_data, selected_walkin_units)
+    case_objects = generate_case_objects_from_data(case_data, selected_case_units, case_zone_name)
+    walkin_objects = generate_walkin_objects_from_data(walkin_data, selected_walkin_units, walkin_zone_name)
 
 
         # Return the generated objects
