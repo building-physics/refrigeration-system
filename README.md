@@ -127,7 +127,7 @@ Systems are categorized by suction temperature level:
 
 Each refrigeration case and walk-in is assigned to a thermal zone in the OpenStudio model.
 
-- **Cases** are placed in `"MainSales"` or a custom zones
+- **Cases** are placed in `"MainSales"` or a custom zone
 - **Walk-ins** are placed in `"ActiveStorage"` or a user-defined zone
 
 → Zones can be defined interactively (**user mode**) or selected automatically (**automated mode**).
