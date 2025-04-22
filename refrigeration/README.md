@@ -57,6 +57,6 @@ refrigeration/
   Builds high-level system objects (e.g., operation type, refrigeration systems) and links components together.
 
 - **`utils.py`**  
-  Helper functions used across modules for formatting, naming, and conversions.
+  Helper functions used across modules for formatting and naming.
 
 ---
