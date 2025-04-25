@@ -1,28 +1,41 @@
 
 def generate_case_objects_from_data(case_data, selected_case_units, case_zone_name):
     """Generate OS:Refrigeration:Case JSON objects based on database data and unit zones."""
-    name_to_osm = {unit.case_name: unit.osm_name for unit in selected_case_units}
-    name_to_zone = {unit.case_name: unit.zone_name for unit in selected_case_units}
 
     objects = []
-    for case_name, info in case_data.items():
-        osm_name = name_to_osm.get(case_name, case_name)
-        zone_name = name_to_zone.get(case_name, case_zone_name)
+    for osm_name, info in case_data.items():
+        zone_name = info.get("zone_name", case_zone_name)
 
         obj = {
             "type": "OS:Refrigeration:Case",
             "name": osm_name,
             "ZoneName": zone_name,
-            "CaseLength": info.get("unit_length"),
+            "CaseName": info.get("case_name"),
+            "Template": info.get("template"),
+            "OperationType": info.get("operation_type"),
             "RatedTotalCoolingCapacity": info.get("rated_capacity"),
+            "CaseLength": round(info.get("unit_length") * info.get("assigned_units", info.get("unit_count", 1)), 1),
             "OperatingTemperature": info.get("case_operating_temperature"),
             "EvaporatorTemperature": info.get("evaporator_temperature"),
             "FanPowerPerUnitLength": info.get("fan_power_per_unit_length"),
             "LightingPowerPerUnitLength": info.get("lighting_power_per_unit_length"),
             "DefrostType": info.get("defrost_type"),
-            "DefrostSchedule": info.get("defrost_schedule"),
-            "DripDownSchedule": info.get("drip_down_schedule"),
-            "CaseLightingScheduleName": info.get("case_lighting_schedule")
+            "DefrostScheduleName": info.get("defrost_schedule"),
+            "DripDownScheduleName": info.get("drip_down_schedule"),
+            "CaseLightingScheduleName": info.get("case_lighting_schedule"),
+            "FractionofLightingEnergytoCase": info.get("fraction_of_lighting_energy_to_case"),
+            "AntiSweatHeaterPowerperUnitLength": info.get("anti_sweat_power"),
+            "AntiSweatHeaterControlType": info.get("anti_sweat_heater_control_type"),
+            "FractionofAntiSweatHeaterEnergytoCase": info.get("fraction_of_anti_sweat_heater_energy_to_cases"),
+            "RatedLatentHeatRatio": info.get("rated_latent_heat_ratio"),
+            "RatedRuntimeFraction": info.get("rated_runtime_fraction"),
+            "LatentCaseCreditCurveType": info.get("latent_case_credit_curve_type"),
+            "LatentCaseCreditCurveName": info.get("latent_case_credit_curve_name"),
+            "DefrostEnergyCorrectionCurveType": info.get("defrost_energy_correction_curve_type"),
+            "DefrostEnergyCorrectionCurveName": info.get("defrost_energy_correction_curve_name"),
+            "DesignCaseHVACReturnAirFraction": info.get("HVAC_return_air_fraction"),
+            "CaseRestockingScheduleName": info.get("restocking_schedule"),
+            "CaseCreditFractionScheduleName": info.get("case_credit_fraction_schedule")
         }
         objects.append(obj)
     return objects
@@ -30,20 +43,22 @@ def generate_case_objects_from_data(case_data, selected_case_units, case_zone_na
 
 def generate_walkin_objects_from_data(walkin_data, selected_walkin_units, walkin_zone_name):
     """Generate OS:Refrigeration:WalkIn JSON objects based on database data and unit zones."""
-    name_to_osm = {unit.walkin_name: unit.osm_name for unit in selected_walkin_units}
-    name_to_zone = {unit.walkin_name: unit.zone_name for unit in selected_walkin_units}
-
     objects = []
-    for walkin_name, info in walkin_data.items():
-        osm_name = name_to_osm.get(walkin_name, walkin_name)
-        zone_name = name_to_zone.get(walkin_name, walkin_zone_name)
+    for osm_name, info in walkin_data.items():
+        zone_name = info.get("zone_name", walkin_zone_name)
 
         obj = {
             "type": "OS:Refrigeration:WalkIn",
             "name": osm_name,
             "ZoneName": zone_name,
+            "WalkInName": info.get("walkin_name"),
+            "Template": info.get("template"),
+            "OperationType": info.get("operation_type"),
+            "InsulatedFloorArea": info.get("insulated_floor_area"),
             "RatedCoolingCapacity": info.get("rated_capacity"),
             "OperatingTemperature": info.get("operating_temperature"),
+            "RatedCoolingSourceTemperature": info.get("rated_cooling_source_temperature"),
+            "RatedTotalHeatingPower": info.get("rated_total_heating_power"),
             "CoolingFanPower": info.get("rated_cooling_fan_power"),
             "LightingPower": info.get("lighting_power"),
             "LightingScheduleName": info.get("lighting_schedule"),
@@ -51,11 +66,19 @@ def generate_walkin_objects_from_data(walkin_data, selected_walkin_units, walkin
             "DefrostControlType": info.get("defrost_control_type"),
             "DefrostScheduleName": info.get("defrost_schedule"),
             "DripDownScheduleName": info.get("drip_down_schedule"),
-            "StockingDoorUValue": info.get("stocking_door_u"),
-            "StockingDoorAreaFacingZone": info.get("area_of_stocking_doors_facing_zone"),
-            "StockingDoorScheduleName": info.get("stocking_door_schedule"),
+            "DefrostPower": info.get("defrost_power"),
+            "TemperatureTerminationDefrostFractionToIce": info.get("temperature_termination_defrost_fraction_to_ice"),
+            "InsulatedFloorUValue": info.get("insulated_floor_uvalue"),
+            "TotalInsulatedSurfaceAreaFacingZone": info.get("total_insulatedsurface_area_facing_zone"),
+            "InsulatedSurfaceUValueFacingZone": info.get("insulated_surface_uvalue_facing_zone"),
+            "GlassReachInDoorAreaFacingZone": info.get("area_of_glass_reachin_doors_facing_zone"),
             "GlassReachInDoorUValue": info.get("reachin_door_uvalue"),
-            "GlassReachInDoorAreaFacingZone": info.get("area_of_glass_reachin_doors_facing_zone")
+            "StockingDoorAreaFacingZone": info.get("area_of_stocking_doors_facing_zone"),
+            "HeightOfStockingDoorsFacingZone": info.get("height_of_stocking_doors_facing_zone"),
+            "StockingDoorUValue": info.get("stocking_door_u"),
+            "StockingDoorScheduleName": info.get("stocking_door_schedule"),
+            "StockingDoorOpeningProtection": info.get("stocking_door_opening_protection"),
+            "AssignedUnits": info.get("assigned_units", 1)
         }
         objects.append(obj)
     return objects

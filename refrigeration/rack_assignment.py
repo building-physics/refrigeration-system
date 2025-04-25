@@ -1,30 +1,46 @@
-from refrigeration.db_utils import get_data_from_db
+from .db_utils import get_data_from_db
 
-# distribution units using greedy algorithm
+# Distribution units using First-Fit Decreasing (FFD) Strategy
 def distribute_units(data, racks, max_capacity_per_rack):
-    units = sorted(
-        data.items(),
-        key=lambda x: x[1].get('total_rated_capacity', x[1].get('rated_capacity', 0)),
-        reverse=True
-    )
+    # Pre-compute total rated capacity for consistent sorting
+    for name, item in data.items():
+        unit_count = item.get('unit_count') or item.get('number_of_units') or 1
+        rated_capacity = item.get('rated_capacity', 0)
+        if 'unit_length' in item:  # Case
+            item['total_rated_capacity'] = rated_capacity * item.get('unit_length', 1) * unit_count
+        else:  # Walk-in
+            item['total_rated_capacity'] = rated_capacity * unit_count
+
+    # Sort by descending total rated capacity
+    units = sorted(data.items(), key=lambda x: x[1]['total_rated_capacity'], reverse=True)
 
     rack_list = []
 
     for name, item in units:
-        rated_capacity = item.get('rated_capacity')
-        unit_count = item.get('unit_count') or item.get('number_of_units')
+        total_capacity = item['total_rated_capacity']
+        rated_capacity = item.get('rated_capacity', 0)
+        unit_length = item.get('unit_length', 1) if 'unit_length' in item else 1
+        unit_count = item.get('unit_count') or item.get('number_of_units') or 1
 
         if not rated_capacity or not unit_count:
             continue
 
-        if rated_capacity * unit_count > max_capacity_per_rack:
+        if total_capacity > max_capacity_per_rack:
+            # Oversized unit → split across multiple racks
             remaining_units = unit_count
             split_index = 1
-            max_units_per_rack = int(max_capacity_per_rack // rated_capacity)
+            
+            if 'unit_length' in item:  # Case
+                unit_capacity = rated_capacity * unit_length
+            else:  # Walk-in
+                unit_capacity = rated_capacity
+
+            max_units_per_rack = max(int(max_capacity_per_rack // unit_capacity), 1)
 
             while remaining_units > 0:
                 units_this_rack = min(remaining_units, max_units_per_rack)
-                cap = units_this_rack * rated_capacity
+
+                cap = units_this_rack * unit_capacity
                 suffix = f" [{split_index}]"
                 unique_name = name + suffix
 
@@ -43,14 +59,23 @@ def distribute_units(data, racks, max_capacity_per_rack):
                 new_item = item.copy()
                 new_item['total_rated_capacity'] = cap
                 new_item['assigned_rack'] = len(rack_list)
+                new_item['assigned_units'] = units_this_rack
+                new_item['osm_name'] = unique_name
                 data[unique_name] = new_item
 
                 remaining_units -= units_this_rack
                 split_index += 1
+
         else:
-            cap = rated_capacity * unit_count
+            # Fits into a rack as-is
+            if 'unit_length' in item:  # Case
+                unit_capacity = rated_capacity * unit_length
+            else:  # Walk-in
+                unit_capacity = rated_capacity
+            
             unique_name = name
             placed = False
+            
             for rack in rack_list:
                 if rack["capacity"] + cap <= max_capacity_per_rack:
                     rack["units"].append({'name': unique_name, 'capacity': cap})
@@ -62,13 +87,29 @@ def distribute_units(data, racks, max_capacity_per_rack):
                 rack_list.append(new_rack)
 
             data[unique_name]['assigned_rack'] = len(rack_list)
+            data[unique_name]['assigned_units'] = unit_count
+            data[unique_name]['osm_name'] = unique_name
 
+    # Finalize racks
     for i, rack in enumerate(rack_list, start=1):
         for unit in rack["units"]:
             base_name = unit["name"]
             if base_name in data:
                 data[base_name]['assigned_rack'] = i
         racks.append(rack["units"])
+
+    print("📦 Final distributed unit keys:")
+    for k in data.keys():
+        print(" -", k)
+    
+    print("\n🎯 Assigned unit count per object:")
+    for k, v in data.items():
+        print(f"{k}: assigned_units = {v.get('assigned_units')}, capacity = {v.get('total_rated_capacity')}")
+
+    
+    print("✅ Assigned rack units:")
+    for name, item in data.items():
+        print(f" - {name}: rack {item.get('assigned_rack')}, assigned_units = {item.get('assigned_units')}")
 
             
 def assign_racks_to_cases_and_walkins(db_path, selected_case_units, selected_walkin_units, default_max_capacity=30000):
@@ -121,39 +162,37 @@ def assign_racks_to_cases_and_walkins(db_path, selected_case_units, selected_wal
         item["osm_name"] = name
     for name, item in walkin_data.items():
         item["osm_name"] = name
+    
+    for item in case_data.values():
+        if 'assigned_units' not in item:
+            item['assigned_units'] = item.get('unit_count') or item.get('number_of_units') or 1
+
+    for item in walkin_data.values():
+        if 'assigned_units' not in item:
+            item['assigned_units'] = item.get('number_of_units') or item.get('unit_count') or 1
 
     return mt_racks, lt_racks, case_data, walkin_data
+
 
 def display_rack_capacity(racks, selected_units, case_or_walkin_data, rack_type=""):
     print(f"\n{rack_type} Racks:")
 
-    name_to_osm = {unit.osm_name: unit.osm_name for unit in selected_units}
-
     for i, rack in enumerate(racks, 1):
         total_capacity = sum(item['capacity'] for item in rack)
         print(f"Rack {i}: Total Capacity = {total_capacity:.2f} W")
+
         for item in rack:
             original_name = item['name']
             cap = item['capacity']
 
-            base_name = original_name.split(" [")[0]
-            suffix = " [" + original_name.split(" [")[1] if " [" in original_name else ""
-
-            if original_name in name_to_osm:
-                osm_display = name_to_osm[original_name]
-            elif base_name in name_to_osm:
-                osm_display = name_to_osm[base_name] + suffix
-            else:
-                osm_display = original_name
-
-            rated = case_or_walkin_data.get(original_name, {}).get('rated_capacity')
-            if not rated:
-                rated = case_or_walkin_data.get(base_name, {}).get('rated_capacity')
+            obj_data = case_or_walkin_data.get(original_name)
 
             unit_count_est = ""
-            if rated:
-                n = int(round(cap / rated))
-                unit_count_est = f" ({n} units)"
+            if obj_data and "assigned_units" in obj_data:
+                unit_count_est = f" ({int(obj_data['assigned_units'])} units)"
 
-            print(f"  - {osm_display} : {cap:.2f} W{unit_count_est}")
+            print(f"  - {original_name} : {cap:.2f} W{unit_count_est}")
+
         print()
+
+         
