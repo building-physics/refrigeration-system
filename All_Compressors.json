@@ -696,6 +696,306 @@
         },
         {
             "type": "OS:Refrigeration:Compressor",
+            "name": "ADVANCED_MT_Rack5_Comp1",
+            "RatedPowerConsumption": 15448,
+            "RatedCapacity": 38099.93,
+            "RefrigerantOilCoolerPower": 0,
+            "EndUseSubcategory": "MT_Compressor_Rack5",
+            "SuctionTemperature": -6.6667,
+            "CompressorCurve": "advanced_Med_Temp_Comp_Pwr_Curve"
+        },
+        {
+            "type": "OS:Refrigeration:Compressor",
+            "name": "ADVANCED_MT_Rack5_Comp2",
+            "RatedPowerConsumption": 15448,
+            "RatedCapacity": 38099.93,
+            "RefrigerantOilCoolerPower": 0,
+            "EndUseSubcategory": "MT_Compressor_Rack5",
+            "SuctionTemperature": -6.6667,
+            "CompressorCurve": "advanced_Med_Temp_Comp_Pwr_Curve"
+        },
+        {
+            "type": "OS:Refrigeration:Compressor",
+            "name": "ADVANCED_MT_Rack5_Comp3",
+            "RatedPowerConsumption": 15448,
+            "RatedCapacity": 38099.93,
+            "RefrigerantOilCoolerPower": 0,
+            "EndUseSubcategory": "MT_Compressor_Rack5",
+            "SuctionTemperature": -6.6667,
+            "CompressorCurve": "advanced_Med_Temp_Comp_Pwr_Curve"
+        },
+        {
+            "type": "OS:Refrigeration:Compressor",
+            "name": "ADVANCED_MT_Rack5_Comp4",
+            "RatedPowerConsumption": 15448,
+            "RatedCapacity": 38099.93,
+            "RefrigerantOilCoolerPower": 0,
+            "EndUseSubcategory": "MT_Compressor_Rack5",
+            "SuctionTemperature": -6.6667,
+            "CompressorCurve": "advanced_Med_Temp_Comp_Pwr_Curve"
+        },
+        {
+            "type": "OS:Refrigeration:Compressor",
+            "name": "ADVANCED_MT_Rack5_Comp5",
+            "RatedPowerConsumption": 15448,
+            "RatedCapacity": 38099.93,
+            "RefrigerantOilCoolerPower": 0,
+            "EndUseSubcategory": "MT_Compressor_Rack5",
+            "SuctionTemperature": -6.6667,
+            "CompressorCurve": "advanced_Med_Temp_Comp_Pwr_Curve"
+        },
+        {
+            "type": "OS:Refrigeration:Compressor",
+            "name": "ADVANCED_MT_Rack5_Comp6",
+            "RatedPowerConsumption": 15448,
+            "RatedCapacity": 38099.93,
+            "RefrigerantOilCoolerPower": 0,
+            "EndUseSubcategory": "MT_Compressor_Rack5",
+            "SuctionTemperature": -6.6667,
+            "CompressorCurve": "advanced_Med_Temp_Comp_Pwr_Curve"
+        },
+        {
+            "type": "OS:Refrigeration:Compressor",
+            "name": "ADVANCED_MT_Rack5_Comp7",
+            "RatedPowerConsumption": 15448,
+            "RatedCapacity": 38099.93,
+            "RefrigerantOilCoolerPower": 0,
+            "EndUseSubcategory": "MT_Compressor_Rack5",
+            "SuctionTemperature": -6.6667,
+            "CompressorCurve": "advanced_Med_Temp_Comp_Pwr_Curve"
+        },
+        {
+            "type": "OS:Refrigeration:Compressor",
+            "name": "ADVANCED_MT_Rack5_Comp8",
+            "RatedPowerConsumption": 15448,
+            "RatedCapacity": 38099.93,
+            "RefrigerantOilCoolerPower": 0,
+            "EndUseSubcategory": "MT_Compressor_Rack5",
+            "SuctionTemperature": -6.6667,
+            "CompressorCurve": "advanced_Med_Temp_Comp_Pwr_Curve"
+        },
+        {
+            "type": "OS:Refrigeration:Compressor",
+            "name": "ADVANCED_MT_Rack5_Comp9",
+            "RatedPowerConsumption": 15448,
+            "RatedCapacity": 38099.93,
+            "RefrigerantOilCoolerPower": 0,
+            "EndUseSubcategory": "MT_Compressor_Rack5",
+            "SuctionTemperature": -6.6667,
+            "CompressorCurve": "advanced_Med_Temp_Comp_Pwr_Curve"
+        },
+        {
+            "type": "OS:Refrigeration:Compressor",
+            "name": "ADVANCED_MT_Rack5_Comp10",
+            "RatedPowerConsumption": 15448,
+            "RatedCapacity": 38099.93,
+            "RefrigerantOilCoolerPower": 0,
+            "EndUseSubcategory": "MT_Compressor_Rack5",
+            "SuctionTemperature": -6.6667,
+            "CompressorCurve": "advanced_Med_Temp_Comp_Pwr_Curve"
+        },
+        {
+            "type": "OS:Refrigeration:Compressor",
+            "name": "ADVANCED_MT_Rack5_Comp11",
+            "RatedPowerConsumption": 15448,
+            "RatedCapacity": 38099.93,
+            "RefrigerantOilCoolerPower": 0,
+            "EndUseSubcategory": "MT_Compressor_Rack5",
+            "SuctionTemperature": -6.6667,
+            "CompressorCurve": "advanced_Med_Temp_Comp_Pwr_Curve"
+        },
+        {
+            "type": "OS:Refrigeration:Compressor",
+            "name": "ADVANCED_MT_Rack5_Comp12",
+            "RatedPowerConsumption": 15448,
+            "RatedCapacity": 38099.93,
+            "RefrigerantOilCoolerPower": 0,
+            "EndUseSubcategory": "MT_Compressor_Rack5",
+            "SuctionTemperature": -6.6667,
+            "CompressorCurve": "advanced_Med_Temp_Comp_Pwr_Curve"
+        },
+        {
+            "type": "OS:Refrigeration:Compressor",
+            "name": "ADVANCED_MT_Rack5_Comp13",
+            "RatedPowerConsumption": 15448,
+            "RatedCapacity": 38099.93,
+            "RefrigerantOilCoolerPower": 0,
+            "EndUseSubcategory": "MT_Compressor_Rack5",
+            "SuctionTemperature": -6.6667,
+            "CompressorCurve": "advanced_Med_Temp_Comp_Pwr_Curve"
+        },
+        {
+            "type": "OS:Refrigeration:Compressor",
+            "name": "ADVANCED_MT_Rack5_Comp14",
+            "RatedPowerConsumption": 15448,
+            "RatedCapacity": 38099.93,
+            "RefrigerantOilCoolerPower": 0,
+            "EndUseSubcategory": "MT_Compressor_Rack5",
+            "SuctionTemperature": -6.6667,
+            "CompressorCurve": "advanced_Med_Temp_Comp_Pwr_Curve"
+        },
+        {
+            "type": "OS:Refrigeration:Compressor",
+            "name": "ADVANCED_MT_Rack5_Comp15",
+            "RatedPowerConsumption": 15448,
+            "RatedCapacity": 38099.93,
+            "RefrigerantOilCoolerPower": 0,
+            "EndUseSubcategory": "MT_Compressor_Rack5",
+            "SuctionTemperature": -6.6667,
+            "CompressorCurve": "advanced_Med_Temp_Comp_Pwr_Curve"
+        },
+        {
+            "type": "OS:Refrigeration:Compressor",
+            "name": "ADVANCED_MT_Rack6_Comp1",
+            "RatedPowerConsumption": 15448,
+            "RatedCapacity": 38099.93,
+            "RefrigerantOilCoolerPower": 0,
+            "EndUseSubcategory": "MT_Compressor_Rack6",
+            "SuctionTemperature": -6.6667,
+            "CompressorCurve": "advanced_Med_Temp_Comp_Pwr_Curve"
+        },
+        {
+            "type": "OS:Refrigeration:Compressor",
+            "name": "ADVANCED_MT_Rack6_Comp2",
+            "RatedPowerConsumption": 15448,
+            "RatedCapacity": 38099.93,
+            "RefrigerantOilCoolerPower": 0,
+            "EndUseSubcategory": "MT_Compressor_Rack6",
+            "SuctionTemperature": -6.6667,
+            "CompressorCurve": "advanced_Med_Temp_Comp_Pwr_Curve"
+        },
+        {
+            "type": "OS:Refrigeration:Compressor",
+            "name": "ADVANCED_MT_Rack6_Comp3",
+            "RatedPowerConsumption": 15448,
+            "RatedCapacity": 38099.93,
+            "RefrigerantOilCoolerPower": 0,
+            "EndUseSubcategory": "MT_Compressor_Rack6",
+            "SuctionTemperature": -6.6667,
+            "CompressorCurve": "advanced_Med_Temp_Comp_Pwr_Curve"
+        },
+        {
+            "type": "OS:Refrigeration:Compressor",
+            "name": "ADVANCED_MT_Rack6_Comp4",
+            "RatedPowerConsumption": 15448,
+            "RatedCapacity": 38099.93,
+            "RefrigerantOilCoolerPower": 0,
+            "EndUseSubcategory": "MT_Compressor_Rack6",
+            "SuctionTemperature": -6.6667,
+            "CompressorCurve": "advanced_Med_Temp_Comp_Pwr_Curve"
+        },
+        {
+            "type": "OS:Refrigeration:Compressor",
+            "name": "ADVANCED_MT_Rack6_Comp5",
+            "RatedPowerConsumption": 15448,
+            "RatedCapacity": 38099.93,
+            "RefrigerantOilCoolerPower": 0,
+            "EndUseSubcategory": "MT_Compressor_Rack6",
+            "SuctionTemperature": -6.6667,
+            "CompressorCurve": "advanced_Med_Temp_Comp_Pwr_Curve"
+        },
+        {
+            "type": "OS:Refrigeration:Compressor",
+            "name": "ADVANCED_MT_Rack6_Comp6",
+            "RatedPowerConsumption": 15448,
+            "RatedCapacity": 38099.93,
+            "RefrigerantOilCoolerPower": 0,
+            "EndUseSubcategory": "MT_Compressor_Rack6",
+            "SuctionTemperature": -6.6667,
+            "CompressorCurve": "advanced_Med_Temp_Comp_Pwr_Curve"
+        },
+        {
+            "type": "OS:Refrigeration:Compressor",
+            "name": "ADVANCED_MT_Rack6_Comp7",
+            "RatedPowerConsumption": 15448,
+            "RatedCapacity": 38099.93,
+            "RefrigerantOilCoolerPower": 0,
+            "EndUseSubcategory": "MT_Compressor_Rack6",
+            "SuctionTemperature": -6.6667,
+            "CompressorCurve": "advanced_Med_Temp_Comp_Pwr_Curve"
+        },
+        {
+            "type": "OS:Refrigeration:Compressor",
+            "name": "ADVANCED_MT_Rack6_Comp8",
+            "RatedPowerConsumption": 15448,
+            "RatedCapacity": 38099.93,
+            "RefrigerantOilCoolerPower": 0,
+            "EndUseSubcategory": "MT_Compressor_Rack6",
+            "SuctionTemperature": -6.6667,
+            "CompressorCurve": "advanced_Med_Temp_Comp_Pwr_Curve"
+        },
+        {
+            "type": "OS:Refrigeration:Compressor",
+            "name": "ADVANCED_MT_Rack6_Comp9",
+            "RatedPowerConsumption": 15448,
+            "RatedCapacity": 38099.93,
+            "RefrigerantOilCoolerPower": 0,
+            "EndUseSubcategory": "MT_Compressor_Rack6",
+            "SuctionTemperature": -6.6667,
+            "CompressorCurve": "advanced_Med_Temp_Comp_Pwr_Curve"
+        },
+        {
+            "type": "OS:Refrigeration:Compressor",
+            "name": "ADVANCED_MT_Rack6_Comp10",
+            "RatedPowerConsumption": 15448,
+            "RatedCapacity": 38099.93,
+            "RefrigerantOilCoolerPower": 0,
+            "EndUseSubcategory": "MT_Compressor_Rack6",
+            "SuctionTemperature": -6.6667,
+            "CompressorCurve": "advanced_Med_Temp_Comp_Pwr_Curve"
+        },
+        {
+            "type": "OS:Refrigeration:Compressor",
+            "name": "ADVANCED_MT_Rack6_Comp11",
+            "RatedPowerConsumption": 15448,
+            "RatedCapacity": 38099.93,
+            "RefrigerantOilCoolerPower": 0,
+            "EndUseSubcategory": "MT_Compressor_Rack6",
+            "SuctionTemperature": -6.6667,
+            "CompressorCurve": "advanced_Med_Temp_Comp_Pwr_Curve"
+        },
+        {
+            "type": "OS:Refrigeration:Compressor",
+            "name": "ADVANCED_MT_Rack6_Comp12",
+            "RatedPowerConsumption": 15448,
+            "RatedCapacity": 38099.93,
+            "RefrigerantOilCoolerPower": 0,
+            "EndUseSubcategory": "MT_Compressor_Rack6",
+            "SuctionTemperature": -6.6667,
+            "CompressorCurve": "advanced_Med_Temp_Comp_Pwr_Curve"
+        },
+        {
+            "type": "OS:Refrigeration:Compressor",
+            "name": "ADVANCED_MT_Rack6_Comp13",
+            "RatedPowerConsumption": 15448,
+            "RatedCapacity": 38099.93,
+            "RefrigerantOilCoolerPower": 0,
+            "EndUseSubcategory": "MT_Compressor_Rack6",
+            "SuctionTemperature": -6.6667,
+            "CompressorCurve": "advanced_Med_Temp_Comp_Pwr_Curve"
+        },
+        {
+            "type": "OS:Refrigeration:Compressor",
+            "name": "ADVANCED_MT_Rack6_Comp14",
+            "RatedPowerConsumption": 15448,
+            "RatedCapacity": 38099.93,
+            "RefrigerantOilCoolerPower": 0,
+            "EndUseSubcategory": "MT_Compressor_Rack6",
+            "SuctionTemperature": -6.6667,
+            "CompressorCurve": "advanced_Med_Temp_Comp_Pwr_Curve"
+        },
+        {
+            "type": "OS:Refrigeration:Compressor",
+            "name": "ADVANCED_MT_Rack6_Comp15",
+            "RatedPowerConsumption": 15448,
+            "RatedCapacity": 38099.93,
+            "RefrigerantOilCoolerPower": 0,
+            "EndUseSubcategory": "MT_Compressor_Rack6",
+            "SuctionTemperature": -6.6667,
+            "CompressorCurve": "advanced_Med_Temp_Comp_Pwr_Curve"
+        },
+        {
+            "type": "OS:Refrigeration:Compressor",
             "name": "ADVANCED_LT_Rack1_Comp1",
             "RatedPowerConsumption": 9766,
             "RatedCapacity": 17181.96,
