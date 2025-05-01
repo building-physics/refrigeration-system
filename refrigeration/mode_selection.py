@@ -37,17 +37,13 @@ def user_mode():
             BuildingUnit("User", case_name, "Category", number_of_units, template=selected_template, user_mode=True)
         )
 
-    print("\n--- Add Walk-in Units ---")
+    print("\n--- Add Walk-in Units (each walk-in is fixed to 1 unit) ---")
     while True:
         walkin_name = input("Enter walk-in name (or 'done' to finish): ").strip()
         if walkin_name.lower() == 'done':
             break
-        try:
-            number_of_units = int(input(f"Enter number of units for {walkin_name}: "))
-        except ValueError:
-            print("❌ Invalid number. Please enter an integer.")
-            continue
-
+            
+        number_of_units = 1 # fixed to 1 for now
         selected_walkin_units.append(
             BuildingUnit("User", walkin_name, "Category", number_of_units, template=selected_template, user_mode=True)
         )

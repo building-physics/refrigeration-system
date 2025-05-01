@@ -1,4 +1,4 @@
-from refrigeration.utils import get_building_name
+from .utils import get_building_name
 import json
 
 # Case + Walk-in
