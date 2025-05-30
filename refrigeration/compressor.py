@@ -1,4 +1,6 @@
-
+# SPDX-FileCopyrightText: 2025-present Oak Ridge National Laboratory, managed by UT-Battelle
+#
+# SPDX-License-Identifier: BSD-3-Clause
 import sqlite3, json
 from .utils import get_suction_temp
 

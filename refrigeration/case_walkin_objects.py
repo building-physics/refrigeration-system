@@ -1,4 +1,6 @@
-
+# SPDX-FileCopyrightText: 2025-present Oak Ridge National Laboratory, managed by UT-Battelle
+#
+# SPDX-License-Identifier: BSD-3-Clause
 def generate_case_objects_from_data(case_data, selected_case_units, case_zone_name):
     """Generate OS:Refrigeration:Case JSON objects based on database data and unit zones."""
 

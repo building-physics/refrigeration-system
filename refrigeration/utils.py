@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2025-present Oak Ridge National Laboratory, managed by UT-Battelle
+#
+# SPDX-License-Identifier: BSD-3-Clause
 import sqlite3
 # define the building type (SuperMarket or User Defined System)
 def get_building_name():

@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2025-present Oak Ridge National Laboratory, managed by UT-Battelle
+#
+# SPDX-License-Identifier: BSD-3-Clause
 from .building_unit import BuildingUnit, SuperMarketSystem, ZONE_MAPPING, BUILDING_LABELS
 
 def get_valid_template():

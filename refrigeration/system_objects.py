@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2025-present Oak Ridge National Laboratory, managed by UT-Battelle
+#
+# SPDX-License-Identifier: BSD-3-Clause
 from .utils import get_suction_temp, get_min_condensing_temp
 from itertools import count
 import json
