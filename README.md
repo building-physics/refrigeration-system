@@ -136,5 +136,4 @@ Each refrigeration case and walk-in is assigned to a thermal zone in the OpenStu
 
 ## 📜 License
 
-**This is a work in progress**  
-Will be distributed under the terms of the **BSD-3-Clause** license.
+**This is a work in progress** distributed under the terms of the **BSD-3-Clause** license.
