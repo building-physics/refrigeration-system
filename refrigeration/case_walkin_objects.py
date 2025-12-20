@@ -19,25 +19,29 @@ def generate_case_objects_from_data(case_data, selected_case_units, case_zone_na
             "CaseLength": round(info.get("unit_length") * info.get("assigned_units", info.get("unit_count", 1)), 1),
             "OperatingTemperature": info.get("case_operating_temperature"),
             "EvaporatorTemperature": info.get("evaporator_temperature"),
-            "FanPowerPerUnitLength": info.get("fan_power_per_unit_length"),
-            "LightingPowerPerUnitLength": info.get("lighting_power_per_unit_length"),
-            "DefrostType": info.get("defrost_type"),
-            "DefrostScheduleName": info.get("defrost_schedule"),
-            "DripDownScheduleName": info.get("drip_down_schedule"),
+            "RatedLatentHeatRatio": info.get("rated_latent_heat_ratio"),
+            "RatedRuntimeFraction": info.get("rated_runtime_fraction"),
+            "LatentCaseCreditCurveType": info.get("latent_case_credit_curve_type"),
+            "LatentCaseCreditCurveName": info.get("latent_case_credit_curve_name"),
+            "FanPowerPerUnitLength": info.get("fan_power"),
+            "LightingPowerPerUnitLength": info.get("lighting_power"),
             "CaseLightingScheduleName": info.get("case_lighting_schedule"),
             "FractionofLightingEnergytoCase": info.get("fraction_of_lighting_energy_to_case"),
             "AntiSweatHeaterPowerperUnitLength": info.get("anti_sweat_power"),
             "AntiSweatHeaterControlType": info.get("anti_sweat_heater_control_type"),
             "FractionofAntiSweatHeaterEnergytoCase": info.get("fraction_of_anti_sweat_heater_energy_to_cases"),
-            "RatedLatentHeatRatio": info.get("rated_latent_heat_ratio"),
-            "RatedRuntimeFraction": info.get("rated_runtime_fraction"),
-            "LatentCaseCreditCurveType": info.get("latent_case_credit_curve_type"),
-            "LatentCaseCreditCurveName": info.get("latent_case_credit_curve_name"),
+            "DefrostPowerPerUnitLength": info.get("defrost_power"),
+            "DefrostType": info.get("defrost_type"),
+            "DefrostScheduleName": info.get("defrost_schedule"),
+            "DripDownScheduleName": info.get("drip_down_schedule"),
             "DefrostEnergyCorrectionCurveType": info.get("defrost_energy_correction_curve_type"),
             "DefrostEnergyCorrectionCurveName": info.get("defrost_energy_correction_curve_name"),
             "DesignCaseHVACReturnAirFraction": info.get("HVAC_return_air_fraction"),
             "CaseRestockingScheduleName": info.get("restocking_schedule"),
-            "CaseCreditFractionScheduleName": info.get("case_credit_fraction_schedule")
+            "CaseCreditFractionScheduleName": info.get("case_credit_fraction_schedule"),
+            "DefrostTime": info.get("defrost_time"),
+            "DripdownTime": info.get("dripdown_time"),
+            "DefrostNumber": info.get("number_of_defrost_per_day")
         }
         objects.append(obj)
     return objects
@@ -80,6 +84,9 @@ def generate_walkin_objects_from_data(walkin_data, selected_walkin_units, walkin
             "StockingDoorUValue": info.get("stocking_door_u"),
             "StockingDoorScheduleName": info.get("stocking_door_schedule"),
             "StockingDoorOpeningProtection": info.get("stocking_door_opening_protection"),
+            "DefrostTime": info.get("defrost_time"),
+            "DripdownTime": info.get("dripdown_time"),
+            "DefrostNumber": info.get("number_of_defrost_per_day"),
             "AssignedUnits": info.get("assigned_units", 1)
         }
         objects.append(obj)
