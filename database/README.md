@@ -138,6 +138,5 @@ Curve Output = C1 + C2*x + C3*x² + C4*y + C5*y² + C6*x*y + C7*x³ + C8*y³ + C
 
 
 ## **License**
-**This is a work in progress**  
-Will be distributed under the terms of the BSD-3-Clause license
+**This is a work in progress**  and is distributed under the terms of the BSD-3-Clause license
 
