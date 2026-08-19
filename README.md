@@ -96,12 +96,12 @@ Refrigeration cases and walk-ins are assigned to Medium or Low Temperature racks
 
 System **template** determines performance assumptions, curve data, and equipment configuration.
 
-- **`old`** : Systems designed **before 2010**  
-  ↳ Legacy setups with lower efficiency  
-- **`new`** : Systems installed **2010–2020**  
-  ↳ Moderately efficient with improved practices  
-- **`advanced`** : Systems **after 2020**  
-  ↳ High-efficiency with modern technologies  
+- **`old`** : Representative systems based on equipment and configurations generally used **before 2010**
+- 
+- **`new`** : Representative systems based on equipment and configurations generally used **from 2010–2020**  
+    
+- **`advanced`** : Representative systems based on more recent equipment and system configurations **after 2020**  
+    
 
 → Your selection impacts compressor sizing, condenser performance, and load distribution.
 
