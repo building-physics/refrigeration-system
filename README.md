@@ -97,7 +97,7 @@ Refrigeration cases and walk-ins are assigned to Medium or Low Temperature racks
 System **template** determines performance assumptions, curve data, and equipment configuration.
 
 - **`old`** : Representative systems based on equipment and configurations generally used **before 2010**
-- 
+ 
 - **`new`** : Representative systems based on equipment and configurations generally used **from 2010–2020**  
     
 - **`advanced`** : Representative systems based on more recent equipment and system configurations **after 2020**  
