@@ -36,10 +36,14 @@ def get_data_from_db(db_path, selected_case_units, selected_walkin_units):
                 case_lighting_schedule, fraction_of_lighting_energy_to_case,
                 anti_sweat_power, anti_sweat_heater_control_type,
                 fraction_of_anti_sweat_heater_energy_to_cases,
+                defrost_power,
                 rated_latent_heat_ratio, rated_runtime_fraction,
                 latent_case_credit_curve_type, latent_case_credit_curve_name,
                 defrost_energy_correction_curve_type, defrost_energy_correction_curve_name,
-                HVAC_return_air_fraction, restocking_schedule, case_credit_fraction_schedule
+                HVAC_return_air_fraction, restocking_schedule,
+                case_credit_fraction_schedule,
+                defrost_time, dripdown_time,
+                number_of_defrost_per_day
             FROM refrigeration_cases 
             WHERE lower(case_name) = ?
             """, (base_name.lower(),))
