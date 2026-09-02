@@ -1,4 +1,16 @@
+# Python cache
 *.pyc
-database/.ipynb_checkpoints/LoadCalculation-backup-checkpoint.ipynb
-.ipynb_checkpoints/example_automated_mode-checkpoint.ipynb
-.ipynb_checkpoints/example_user_mode-checkpoint.ipynb
+__pycache__/
+
+# Pytest cache
+.pytest_cache/
+
+# Jupyter checkpoints
+**/.ipynb_checkpoints/
+
+# Generated JSON outputs
+/All_Cases_Walkins.json
+/All_Compressors.json
+/All_Condensers.json
+/Full_Refrigeration_System.json
+/System_and_CaseWalkin_Lists.json
