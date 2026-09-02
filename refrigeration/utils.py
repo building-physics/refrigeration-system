@@ -3,11 +3,19 @@
 # SPDX-License-Identifier: BSD-3-Clause
 import sqlite3
 # define the building type (SuperMarket or User Defined System)
+from .building_unit import BUILDING_SUPERMARKET
+_current_mode = "user"
+
+def set_mode(mode):
+    global _current_mode
+    _current_mode = mode.lower()
+
 def get_building_name():
-    mode = globals().get("mode", "user").lower()
-    return "SuperMarket" if mode == "automated" else "User Defined System"
-
-
+    return (
+        BUILDING_SUPERMARKET
+        if _current_mode == "automated"
+        else "User Defined System"
+    )
 
 # get SST (Saturated Suction Temperature)
 def get_suction_temp(template, operation_type):

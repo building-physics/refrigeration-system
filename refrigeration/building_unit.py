@@ -2,20 +2,23 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 import sqlite3
+BUILDING_SUPERMARKET = "SuperMarket"
+BUILDING_CONVENIENCE_STORE = "ConvenienceStore"
+
 ZONE_MAPPING = {
-    "SuperMarket":{
+    BUILDING_SUPERMARKET:{
         "case_zone": "MainSales",
         "walkin_zone": "ActiveStorage"
     },
-    "ConvenienceStore": {
+BUILDING_CONVENIENCE_STORE: {
         "case_zone": "conv_casezone",
         "walkin_zone": "conv_walkinzone"
     }
 }
 
 BUILDING_LABELS = {
-    "SuperMarket": "SuperMarket",
-    "ConvenienceStore": "Convenience Store (Not Available yet)"
+    BUILDING_SUPERMARKET: "SuperMarket",
+    BUILDING_CONVENIENCE_STORE: "Convenience Store (Not Available yet)"
 }
 
 class BuildingUnit:
@@ -45,7 +48,7 @@ class BuildingUnit:
 
 class SuperMarketSystem:
     def __init__(self, system_type, db_path):
-        self.building_type = "SuperMarket"
+        self.building_type = BUILDING_SUPERMARKET
         self.system_type = system_type
         self.db_path = db_path
         self.cases = []
@@ -59,8 +62,8 @@ class SuperMarketSystem:
         cursor.execute("""
             SELECT base_name, category, number_of_units
             FROM building_category_mapping
-            WHERE building_type = 'SuperMarket' AND system_type = 'case' AND template = ?;
-        """, (self.system_type,))
+            WHERE building_type = ? AND system_type = 'case' AND template = ?;
+        """, (self.building_type, self.system_type))
         case_results = cursor.fetchall()
         self.cases = [BuildingUnit(self.building_type, base, category, qty, self.system_type) for base, category, qty in case_results]
 
@@ -68,8 +71,8 @@ class SuperMarketSystem:
         cursor.execute("""
             SELECT base_name, category
             FROM building_category_mapping
-            WHERE building_type = 'SuperMarket' AND system_type = 'walkin' AND template = ?;
-        """, (self.system_type,))
+            WHERE building_type = ? AND system_type = 'walkin' AND template = ?;
+        """, (self.building_type, self.system_type))
         walkin_results = cursor.fetchall()
         self.walkins = [BuildingUnit(self.building_type, base, category, template=self.system_type) for base, category in walkin_results]
 

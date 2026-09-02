@@ -25,7 +25,7 @@ def generate_case_objects_from_data(case_data, selected_case_units, case_zone_na
             "LatentCaseCreditCurveName": info.get("latent_case_credit_curve_name"),
             "FanPowerPerUnitLength": info.get("fan_power"),
             "LightingPowerPerUnitLength": info.get("lighting_power"),
-            "CaseLightingScheduleName": info.get("case_lighting_schedule"),
+            "CaseLightingScheduleName": info.get("case_lighting_schedules"),
             "FractionofLightingEnergytoCase": info.get("fraction_of_lighting_energy_to_case"),
             "AntiSweatHeaterPowerperUnitLength": info.get("anti_sweat_power"),
             "AntiSweatHeaterControlType": info.get("anti_sweat_heater_control_type"),
@@ -40,7 +40,7 @@ def generate_case_objects_from_data(case_data, selected_case_units, case_zone_na
             "CaseRestockingScheduleName": info.get("restocking_schedule"),
             "CaseCreditFractionScheduleName": info.get("case_credit_fraction_schedule"),
             "DefrostTime": info.get("defrost_time"),
-            "DripdownTime": info.get("dripdown_time"),
+            "DripdownTime": info.get("drip_down_time"),
             "DefrostNumber": info.get("number_of_defrost_per_day")
         }
         objects.append(obj)

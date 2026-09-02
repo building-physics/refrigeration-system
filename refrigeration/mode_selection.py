@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2025-present Oak Ridge National Laboratory, managed by UT-Battelle
 #
 # SPDX-License-Identifier: BSD-3-Clause
-from .building_unit import BuildingUnit, SuperMarketSystem, ZONE_MAPPING, BUILDING_LABELS
+from .building_unit import BuildingUnit, SuperMarketSystem, ZONE_MAPPING, BUILDING_LABELS, BUILDING_SUPERMARKET, BUILDING_CONVENIENCE_STORE
 
 def get_valid_template():
     valid_templates = ["old", "new", "advanced"]
@@ -76,9 +76,9 @@ def automated_mode(db_path):
     selected_template = get_valid_template()
 
     system = None
-    if selected_building_type == "SuperMarket":
+    if selected_building_type == BUILDING_SUPERMARKET:
         system = SuperMarketSystem(selected_template, db_path)
-    elif selected_building_type == "Convenience Store":
+    elif selected_building_type == BUILDING_CONVENIENCE_STORE:
         # Future placeholder
         raise NotImplementedError("Convenience Store system type is not yet supported.")
     

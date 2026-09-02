@@ -2,7 +2,9 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 from .utils import get_min_condensing_temp
-def generate_condenser_objects(rack_info, operation_type, template):
+from .compressor import get_compressor_specs
+
+def generate_condenser_objects(rack_info, operation_type, template, db_path):
     """
     Generate OS:Refrigeration:Condenser:AirCooled objects and corresponding performance curves
     for each rack based on the rack load and operation type (MT or LT).
@@ -19,18 +21,18 @@ def generate_condenser_objects(rack_info, operation_type, template):
     curves = []
 
     min_cond_temp = get_min_condensing_temp(template, operation_type)
+    _, _, reference_cop, _ = get_compressor_specs(
+    db_path, template, operation_type
+)
 
     for rack in rack_info:
         rack_num = rack['rack_number']
         load = rack['rack_load']
 
         # Condenser capacity 
-        if operation_type == "LT":
-            cond_capacity = round(1.2 * load * (1 + 1 / 1.3),2)
-        elif operation_type == "MT":
-            cond_capacity = round(1.2 * load * (1 + 1 / 2.0),2)
-        else:
-            raise ValueError("Invalid operation type. Must be 'MT' or 'LT'.")
+        cond_capacity = round(
+            1.2 * load * (1 + 1 / reference_cop), 2
+        )
 
         fan_power = round(0.0441 * cond_capacity + 695,2)
         condenser_name = f"{operation_type}_Rack{rack_num}_Condenser"
@@ -61,7 +63,7 @@ def generate_condenser_objects(rack_info, operation_type, template):
 
 
     
-def prepare_and_store_condenser_objects(mt_info, lt_info, selected_template):
+def prepare_and_store_condenser_objects(mt_info, lt_info, selected_template, db_path):
     """
     Generate and store condenser and curve objects without using global variables.
 
@@ -74,8 +76,8 @@ def prepare_and_store_condenser_objects(mt_info, lt_info, selected_template):
         dict: A dictionary containing the condenser and curve objects for MT and LT
     """
     # Generate condenser and curve objects for MT and LT
-    mt_condensers, mt_curves = generate_condenser_objects(mt_info, "MT", selected_template)
-    lt_condensers, lt_curves = generate_condenser_objects(lt_info, "LT", selected_template)
+    mt_condensers, mt_curves = generate_condenser_objects(mt_info, "MT", selected_template, db_path)
+    lt_condensers, lt_curves = generate_condenser_objects(lt_info, "LT", selected_template, db_path)
 
     # Return the generated objects as a dictionary
     result = {

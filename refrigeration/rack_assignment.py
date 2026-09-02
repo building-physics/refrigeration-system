@@ -36,6 +36,22 @@ def distribute_units(data: Dict, racks: List, max_capacity_per_rack):
                 break
 
         if not placed:
+            overflow_ratio = (
+                total_capacity / max_capacity_per_rack - 1
+            )
+            if overflow_ratio >0.20:
+                print ( 
+                    f"REVIEW REQUIRED: {name} exceeds the target "
+                    f"rack capacity by {overflow_ratio:.1%}: "
+                    f"{total_capacity:.2f} W > "
+                    f"{max_capacity_per_rack:.2f} W"
+                )
+            elif overflow_ratio >0:
+                print(
+                    f"{name} exceeds the target rack capacity by "
+                    f"{overflow_ratio:.1%}."
+                )
+
             rack_list.append({
                 "units": [{"name": name, "capacity": total_capacity}],
                 "capacity": total_capacity
