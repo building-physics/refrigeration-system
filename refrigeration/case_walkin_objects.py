@@ -40,7 +40,7 @@ def generate_case_objects_from_data(case_data, selected_case_units, case_zone_na
             "CaseRestockingScheduleName": info.get("restocking_schedule"),
             "CaseCreditFractionScheduleName": info.get("case_credit_fraction_schedule"),
             "DefrostTime": info.get("defrost_time"),
-            "DripdownTime": info.get("dripdown_time"),
+            "DripdownTime": info.get("drip_down_time"),
             "DefrostNumber": info.get("number_of_defrost_per_day")
         }
         objects.append(obj)

@@ -3,8 +3,12 @@
 # SPDX-License-Identifier: BSD-3-Clause
 import sqlite3, json
 from .utils import get_suction_temp
+REFERENCE_CONDITIONS = {
+    "LT": {"sst_c": -31.6667, "sct_c": 40.5556},  # -25°F / 105°F
+    "MT": {"sst_c": -6.6667, "sct_c": 48.8889}    #  20°F / 120°F
+}
 
-def generate_compressor_objects(compressor_info, template, operation_type, power_curve_json=None, capacity_curve_json=None):
+def generate_compressor_objects(compressor_info, template, operation_type, db_path, power_curve_json=None, capacity_curve_json=None):
     """
     Generate RefrigerationCompressor OpenStudio JSON objects including performance curve and suction temp.
 
@@ -12,6 +16,7 @@ def generate_compressor_objects(compressor_info, template, operation_type, power
         compressor_info (list): rack_number, rack_load, compressors_needed
         template (str): 'old', 'new', or 'advanced'
         operation_type (str): 'MT' or 'LT'
+        db_path (str): Path to the SQLite database
         power_curve_json (dict): power curve JSON
         capacity_cruve_json (dict): capacity curve JSON 
 
@@ -19,7 +24,7 @@ def generate_compressor_objects(compressor_info, template, operation_type, power
         List[dict]: List of RefrigerationCompressor JSON objects
     """
     compressor_objects = []
-    capacity_w, power_w, cop, eer = get_compressor_specs(template, operation_type)
+    capacity_w, power_w, cop, eer = get_compressor_specs(db_path, template, operation_type)
     suction_temp = get_suction_temp(template, operation_type)  
 
     for rack in compressor_info:
@@ -51,27 +56,9 @@ def generate_compressor_objects(compressor_info, template, operation_type, power
 
     return compressor_objects
 
-def get_compressor_specs(template, operation_type):
-    """Return compressor specs: capacity (W), power (W), COP, EER."""
-    specs = {
-        ("old", "MT"):      (52733.94, 24945.00, 2.12,   7.22),
-        ("new", "MT"):      (38099.93, 15448.00, 2.47,   8.42),
-        ("advanced", "MT"): (32421.65, 11590.78, 2.80,   9.54),
 
-        ("old", "LT"):      (20038.77, 13963.00, 1.44,   4.90),
-        ("new", "LT"):      (17181.96,  9766.00, 1.76,   6.00),
-        ("advanced", "LT"): (14385.26,  7853.75, 1.83,   6.25),
-    }
 
-    try:
-        return specs[(template, operation_type)]
-    except KeyError:
-        raise ValueError(
-            f"Unknown compressor specification: "
-            f"template={template}, operation_type={operation_type}"
-        )
-
-def summarize_compressor_assignment(mt_racks, lt_racks, selected_template):
+def summarize_compressor_assignment(mt_racks, lt_racks, selected_template, db_path):
     """
     Calculate and display compressor assignment and specs based on rack loads and template.
     
@@ -79,12 +66,13 @@ def summarize_compressor_assignment(mt_racks, lt_racks, selected_template):
         mt_racks (list): List of MT rack load info
         lt_racks (list): List of LT rack load info
         selected_template (str): Template type ('old', 'new', 'advanced')
+        db_path (str): Path to the SQLite database
     
     Returns:
         Tuple: (mt_info, lt_info) list of compressor assignments for each rack
     """
-    mt_info = calculate_compressors_for_racks(mt_racks, "MT", template=selected_template)
-    lt_info = calculate_compressors_for_racks(lt_racks, "LT", template=selected_template)
+    mt_info = calculate_compressors_for_racks(mt_racks, "MT", template=selected_template, db_path=db_path)
+    lt_info = calculate_compressors_for_racks(lt_racks, "LT", template=selected_template, db_path=db_path)
 
     print("\n🧊 MT Rack Compressor Assignment:")
     for info in mt_info:
@@ -94,9 +82,9 @@ def summarize_compressor_assignment(mt_racks, lt_racks, selected_template):
     for info in lt_info:
         print(f"Rack {info['rack_number']}: Load = {info['rack_load']:.2f} W → Number of Compressors Needed = {info['compressors_needed']}")
 
-    # Specs 출력
-    mt_capacity, mt_power, mt_cop, mt_eer = get_compressor_specs(selected_template, "MT")
-    lt_capacity, lt_power, lt_cop, lt_eer = get_compressor_specs(selected_template, "LT")
+    # Specs 
+    mt_capacity, mt_power, mt_cop, mt_eer = get_compressor_specs(db_path, selected_template, "MT")
+    lt_capacity, lt_power, lt_cop, lt_eer = get_compressor_specs(db_path, selected_template, "LT")
 
     print(f"\n⚙️ Compressor Specs for the selected template '{selected_template}':")
     print(f"🧊 MT → Capacity: {mt_capacity:.2f} W, Power: {mt_power:.2f} W, COP: {mt_cop:.2f}, EER: {mt_eer:.2f}")
@@ -155,6 +143,62 @@ def get_compressor_curve(db_path, template, operation_type, curve_type=None):
 
     return curve_json
 
+def evaluate_bicubic_curve(curve, x, y):
+    return (
+        curve["Coefficient1Constant"]
+        + curve["Coefficient2x"] * x
+        + curve["Coefficient3x2"] * x**2
+        + curve["Coefficient4y"] * y
+        + curve["Coefficient5y2"] * y**2
+        + curve["Coefficient6xy"] * x * y
+        + curve["Coefficient7x3"] * x**3
+        + curve["Coefficient8y3"] * y**3
+        + curve["Coefficient9x2y"] * x**2 * y
+        + curve["Coefficient10xy2"] * x * y**2
+    )
+
+
+def get_compressor_specs(
+    db_path, template, operation_type
+):
+    operation_type = operation_type.upper()
+    template = template.lower()
+
+    condition = REFERENCE_CONDITIONS[operation_type]
+    x = condition["sst_c"]
+    y = condition["sct_c"]
+
+    capacity_curve = get_compressor_curve(
+        db_path, template, operation_type, "capacity"
+    )
+    power_curve = get_compressor_curve(
+        db_path, template, operation_type, "power"
+    )
+
+    if capacity_curve is None or power_curve is None:
+        raise ValueError(
+            f"Missing compressor curve: "
+            f"{template}, {operation_type}"
+        )
+
+    capacity_w = evaluate_bicubic_curve(
+        capacity_curve, x, y
+    )
+    power_w = evaluate_bicubic_curve(
+        power_curve, x, y
+    )
+
+    if capacity_w <= 0 or power_w <= 0:
+        raise ValueError(
+            f"Invalid reference compressor result: "
+            f"capacity={capacity_w}, power={power_w}"
+        )
+
+    cop = capacity_w / power_w
+    eer = cop * 3.412141633
+
+    return capacity_w, power_w, cop, eer
+
 def load_and_print_compressor_curves(db_path, selected_template, verbose=True):
     mt_power_curve = get_compressor_curve(db_path, selected_template, "MT", curve_type="power")
     mt_capacity_curve = get_compressor_curve(db_path, selected_template, "MT", curve_type="capacity")
@@ -174,8 +218,8 @@ def load_and_print_compressor_curves(db_path, selected_template, verbose=True):
     return mt_power_curve, mt_capacity_curve, lt_power_curve, lt_capacity_curve
 
     
-def calculate_compressors_for_racks(racks, rack_type, template, redundancy=True):
-    capacity, _, _, _ = get_compressor_specs(template, rack_type)
+def calculate_compressors_for_racks(racks, rack_type, template, db_path, redundancy=True):
+    capacity, _, _, _ = get_compressor_specs(db_path, template, rack_type)
 
     compressors_per_rack = []
     for i, rack in enumerate(racks, 1):
@@ -199,8 +243,8 @@ def prepare_and_store_compressor_objects(mt_info, lt_info, template, db_path):
     # 1. Load performance curves from database
     mt_power_curve, mt_capacity_curve, lt_power_curve, lt_capacity_curve = load_and_print_compressor_curves(db_path, template, verbose=False)
     # 2. Generate compressor objects using power curves
-    mt_compressors = generate_compressor_objects(mt_info, template, "MT", power_curve_json=mt_power_curve, capacity_curve_json=mt_capacity_curve)
-    lt_compressors = generate_compressor_objects(lt_info, template, "LT",  power_curve_json=lt_power_curve, capacity_curve_json=lt_capacity_curve)
+    mt_compressors = generate_compressor_objects(mt_info, template, "MT", db_path, power_curve_json=mt_power_curve, capacity_curve_json=mt_capacity_curve)
+    lt_compressors = generate_compressor_objects(lt_info, template, "LT", db_path, power_curve_json=lt_power_curve, capacity_curve_json=lt_capacity_curve)
 
     result = {
         "mt_compressors": mt_compressors,
